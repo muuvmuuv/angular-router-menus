@@ -1,0 +1,11 @@
+<h1>Hey you!</h1>
+
+<ul>
+	@for (item of menu(); track item.href) {
+		<li>
+			<a [routerLink]="item.href" routerLinkActive="active">{{ item.label }}</a>
+		</li>
+	}
+</ul>
+
+<router-outlet />

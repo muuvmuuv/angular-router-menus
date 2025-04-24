@@ -1,0 +1,29 @@
+{
+	"name": "angular-router-menus-workspace",
+	"version": "0.0.0",
+	"license": "MIT",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"serve": "pnpm --filter=app serve",
+		"lint": "biome check .",
+		"format": "biome check --unsafe --write ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/node": "^22.14.1",
+		"del-cli": "^6.0.0",
+		"prettier": "^3.5.3",
+		"typescript": "5.8.2"
+	},
+	"engines": {
+		"node": ">=22"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": ["@biomejs/biome", "esbuild"],
+		"peerDependencyRules": {
+			"ignoreMissing": ["zone.js"],
+			"allowAny": ["zone.js"]
+		}
+	}
+}
