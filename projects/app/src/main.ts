@@ -6,11 +6,11 @@ import { provideRouter, withComponentInputBinding } from "@angular/router"
 
 import { provideRouterMenus } from "angular-router-menus"
 
-import { menus } from "src/menus"
 import { AppComponent } from "./app/app.component"
+import { menus } from "./menus"
 import { routes } from "./routes"
 
-bootstrapApplication(AppComponent, {
+void bootstrapApplication(AppComponent, {
 	providers: [
 		provideExperimentalZonelessChangeDetection(),
 		provideRouter(routes, withComponentInputBinding()),

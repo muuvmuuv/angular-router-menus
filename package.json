@@ -24,6 +24,9 @@
 		"peerDependencyRules": {
 			"ignoreMissing": ["zone.js"],
 			"allowAny": ["zone.js"]
+		},
+		"overrides": {
+			"angular-router-menus": "link:./projects/angular-router-menus/dist"
 		}
 	}
 }

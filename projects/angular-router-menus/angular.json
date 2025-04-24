@@ -7,10 +7,27 @@
 	},
 	"projects": {
 		"angular-router-menus": {
-			"root": ".",
-			"sourceRoot": "src",
 			"projectType": "library",
-			"architect": {}
+			"root": "./",
+			"sourceRoot": "./src",
+			"prefix": "lib",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:ng-packagr",
+					"options": {
+						"project": "./ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "./tsconfig.prod.json"
+						},
+						"development": {
+							"tsConfig": "./tsconfig.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				}
+			}
 		}
 	}
 }

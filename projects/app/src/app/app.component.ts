@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core"
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router"
-import { MENU_STACK } from "src/menus"
+
+import { MENU_STACK } from "../menus"
 
 @Component({
 	selector: "app-root",

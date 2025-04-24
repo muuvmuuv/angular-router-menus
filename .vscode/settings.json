@@ -3,7 +3,7 @@
 	"vsicons.presets.angular": true,
 	"stylelint.packageManager": "pnpm",
 	"npm.packageManager": "pnpm",
-	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"typescript.preferences.importModuleSpecifier": "relative",
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"[html]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"

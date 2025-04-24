@@ -2,6 +2,6 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"baseUrl": ".",
-		"types": ["angular-router-menus/types", "angular-router-menus/angular"]
+		"types": ["angular-router-menus", "angular-router-menus/angular"]
 	}
 }

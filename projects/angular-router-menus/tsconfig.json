@@ -3,10 +3,11 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"outDir": "./out-tsc",
-		"sourceMap": true,
 		"declaration": true,
-		"lib": ["ES2022", "DOM", "DOM.Iterable"],
-		"types": []
+		"declarationMap": true,
+		"sourceMap": true,
+		"inlineSources": true,
+		"lib": ["ES2022", "DOM", "DOM.Iterable"]
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["src/**/*.spec.ts"]

@@ -30,10 +30,7 @@
 		"moduleResolution": "Bundler",
 		"module": "ES2022",
 		"target": "ES2022",
-		"lib": ["ES2022", "DOM", "DOM.Iterable"],
-		"paths": {
-			"angular-router-menus": ["./projects/angular-router-menus/src/*"]
-		}
+		"lib": ["ES2022", "DOM", "DOM.Iterable"]
 	},
 	"angularCompilerOptions": {
 		"disableTypeScriptVersionCheck": true,

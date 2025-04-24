@@ -1,5 +1,7 @@
 import "@angular/router"
 
+import type { RouteMenuItem } from "./lib/menu"
+
 /**
  * Add the `menu` property to `Route`.
  */

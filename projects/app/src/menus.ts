@@ -1,5 +1,6 @@
 import { InjectionToken, type WritableSignal, signal } from "@angular/core"
-import type { MenuStacks } from "angular-router-menus/stacks"
+
+import type { MenuItems, MenuStacks } from "angular-router-menus"
 
 export const MENU_STACK = new InjectionToken<WritableSignal<MenuItems>>("MENU_STACK", {
 	providedIn: "root",

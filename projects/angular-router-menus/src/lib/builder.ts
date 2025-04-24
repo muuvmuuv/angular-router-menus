@@ -5,12 +5,11 @@ import {
 	inject,
 } from "@angular/core"
 import { RouterPreloader, type Routes } from "@angular/router"
-import { orderBy } from "lodash-es"
 import { firstValueFrom } from "rxjs"
 
-import { normalizePath, sleep, toEntries } from "./helper"
+import { normalizePath, toEntries } from "./helper"
+import type { MenuItem, MenuItems, MenuStacks } from "./menu"
 import type { RouterMenusOptions } from "./options"
-import type { MenuStacks } from "./stacks"
 
 async function resolveLazyLoadedChildren(
 	routes: Routes,
@@ -69,7 +68,7 @@ function convertRoutesToMenuItems(
 
 		const menuItem: MenuItem = {
 			label: "", // keep empty for later checks
-			priority: route.menu?.priority ?? 0,
+			priority: route.menu?.priority ?? loopRoutes.indexOf(route),
 			in: route.menu?.in ?? options.defaultMenu,
 			href,
 		}
@@ -113,16 +112,15 @@ function buildMenu(data: MenuItems, inMenu: Menus) {
 }
 
 function orderByPriority(items: MenuItems): MenuItems {
-	return orderBy(
-		items,
-		(item) => {
-			if (item.children) {
-				item.children = orderByPriority(item.children)
-			}
-			return item.priority
-		},
-		"desc",
-	)
+	items.sort((a, b) => a.priority - b.priority)
+
+	for (const item of items) {
+		if (item.children) {
+			item.children = orderByPriority(item.children)
+		}
+	}
+
+	return items
 }
 
 export async function buildRouterMenus(
@@ -144,7 +142,7 @@ export async function buildRouterMenus(
 		injectedMenuStacks[stack] = inject(token)
 	}
 
-	await sleep(100) // makes it little lazier
+	// await sleep(3000) // make it sleepy
 
 	// 1. We need to resolve all lazy async children
 
