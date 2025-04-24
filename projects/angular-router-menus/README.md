@@ -6,13 +6,15 @@ Simplify your Angular applications navigation by defining menu entries directly 
 pnpm add angular-router-menus
 ```
 
-> For an example go to projects/app and run it :) …
+> [!TIP]
+> Zero dependencies and no performance bottleneck!
 
 - [Installation](#installation)
   - [`menus.ts`](#menusts)
   - [`main.ts`](#maints)
 - [Usage](#usage)
 - [Configuration](#configuration)
+- [Examples](#examples)
 
 ## Installation
 
@@ -104,3 +106,7 @@ For details on menu items configuration, please take a look at the interfaces an
 | Property      | Description                                       |
 | ------------- | ------------------------------------------------- |
 | `defaultMenu` | If not defined via `in` this is the default menu. |
+
+## Examples
+
+For an example go to projects/app and run it :)

@@ -11,13 +11,14 @@ import { normalizePath, toEntries } from "./helper"
 import type { MenuItem, MenuItems, MenuStacks } from "./menu"
 import type { RouterMenusOptions } from "./options"
 
-async function resolveLazyLoadedChildren(
-	routes: Routes,
-	injector: EnvironmentInjector,
-	preloader: RouterPreloader,
-) {
+async function resolveLazyLoadedChildren(routes: Routes) {
+	assertInInjectionContext(resolveLazyLoadedChildren)
+
+	const injector = inject(EnvironmentInjector)
+	const routerPreloader = inject(RouterPreloader)
+
 	// @ts-expect-error The required method is not exported but private
-	const loader = preloader.loader as RouterConfigLoader
+	const loader = routerPreloader.loader as RouterConfigLoader
 
 	async function resolveLazyLoop(_routes: Routes) {
 		for (const route of _routes) {
@@ -130,23 +131,15 @@ export async function buildRouterMenus(
 ) {
 	assertInInjectionContext(buildRouterMenus)
 
-	const injector = inject(EnvironmentInjector)
-	const routerPreloader = inject(RouterPreloader)
-
-	const injectedMenuStacks: Record<Menus, WritableSignal<MenuItems>> = {} as never as Record<
-		Menus,
-		WritableSignal<MenuItems>
-	>
+	const injectedMenuStacks = {} as never as Record<Menus, WritableSignal<MenuItems>>
 	for (const [stack, token] of toEntries(menuStacks)) {
 		// We must inject them before all loops because we are not awaiting the builder
 		injectedMenuStacks[stack] = inject(token)
 	}
 
-	// await sleep(3000) // make it sleepy
-
 	// 1. We need to resolve all lazy async children
 
-	await resolveLazyLoadedChildren(routes, injector, routerPreloader)
+	await resolveLazyLoadedChildren(routes)
 
 	// 2. Remove all routes that do not contain a menu property
 

@@ -16,6 +16,7 @@ void bootstrapApplication(AppComponent, {
 		provideRouter(routes, withComponentInputBinding()),
 		provideRouterMenus(routes, menus, {
 			defaultMenu: "main",
+			debug: false,
 		}),
 		provideAnimationsAsync(),
 		provideHttpClient(withFetch()),
