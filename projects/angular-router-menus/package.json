@@ -4,11 +4,6 @@
 	"description": "Angular Router menus that build itself on-the-fly with options",
 	"license": "MIT",
 	"keywords": ["angular", "angular-router", "router", "menu"],
-	"exports": {
-		"./angular": {
-			"types": "./angular.d.ts"
-		}
-	},
 	"scripts": {
 		"build": "ng build",
 		"watch": "ng build --watch",

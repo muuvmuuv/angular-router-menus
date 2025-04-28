@@ -9,7 +9,7 @@ import {
 	withPreloading,
 } from "@angular/router"
 
-import { provideRouterMenus } from "angular-router-menus"
+import { provideRouterMenus, provideRouterMenus2 } from "angular-router-menus"
 
 import { AppComponent } from "./app/app.component"
 import { environment } from "./environments/environment"
@@ -25,6 +25,12 @@ void bootstrapApplication(AppComponent, {
 		provideExperimentalZonelessChangeDetection(),
 		provideRouter(routes, withPreloading(NoPreloading), withComponentInputBinding()),
 		provideRouterMenus(routes, menus, {
+			// v1
+			defaultMenu: "main",
+			debug: !environment.production,
+		}),
+		provideRouterMenus2(routes, ["main"], {
+			// v2
 			defaultMenu: "main",
 			debug: !environment.production,
 		}),

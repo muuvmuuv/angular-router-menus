@@ -10,6 +10,7 @@ import { firstValueFrom } from "rxjs"
 import { normalizePath, toEntries } from "./helper"
 import type { MenuItem, MenuItems, MenuStacks } from "./menu"
 import type { RouterMenusOptions } from "./options"
+import { RouterMenusService } from "./service"
 
 async function resolveLazyLoadedChildren(routes: Routes) {
 	assertInInjectionContext(resolveLazyLoadedChildren)
@@ -154,5 +155,34 @@ export async function buildRouterMenus(
 	for (const [stack, token] of toEntries(injectedMenuStacks)) {
 		const stackMenu = orderByPriority(buildMenu(menuItems, stack))
 		token.set(stackMenu)
+	}
+}
+
+export async function buildRouterMenus2(
+	routes: Routes,
+	menus: Menus[],
+	options: RouterMenusOptions,
+) {
+	assertInInjectionContext(buildRouterMenus)
+
+	const routerMenusService = inject(RouterMenusService)
+
+	// 1. We need to resolve all lazy async children
+
+	await resolveLazyLoadedChildren(routes)
+
+	// 2. Remove all routes that do not contain a menu property
+
+	const filteredRoutes = filterRoutesWithMenu(routes)
+
+	// 3. Convert the filtered routes to menu items
+
+	const menuItems = convertRoutesToMenuItems(filteredRoutes, options)
+
+	// 4. Now we build the menu stack based on "in" which they are located
+
+	for (const menu of menus) {
+		const stackMenu = orderByPriority(buildMenu(menuItems, menu))
+		routerMenusService.use(menu).set(stackMenu)
 	}
 }
