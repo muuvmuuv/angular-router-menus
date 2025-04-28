@@ -62,6 +62,7 @@ void bootstrapApplication(AppComponent, {
 		provideRouter(routes, withComponentInputBinding()),
 		provideRouterMenus(routes, menus, {
 			defaultMenu: "main", // 👋🏻
+      debug: false, //  Set to `true` to get some hints
 		}),
 	],
 }).catch((error) => {
@@ -106,6 +107,7 @@ For details on menu items configuration, please take a look at the interfaces an
 | Property      | Description                                       |
 | ------------- | ------------------------------------------------- |
 | `defaultMenu` | If not defined via `in` this is the default menu. |
+
 
 ## Examples
 
