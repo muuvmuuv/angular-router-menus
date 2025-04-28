@@ -65,11 +65,11 @@ function convertRoutesToMenuItems(
 
 	for (const route of loopRoutes) {
 		// Fix path and remove anomalies
-		const href = normalizePath(`/${parent?.href}/${route.path}`)
+		const href = normalizePath(`/${parent?.href ?? ""}/${route.path ?? ""}`)
 
 		const menuItem: MenuItem = {
 			label: "", // keep empty for later checks
-			priority: route.menu?.priority ?? loopRoutes.indexOf(route),
+			priority: route.menu?.priority ?? 0,
 			in: route.menu?.in ?? options.defaultMenu,
 			href,
 		}
