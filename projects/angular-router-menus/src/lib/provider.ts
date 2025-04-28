@@ -20,7 +20,7 @@ export const provideRouterMenus = (
 		const injector = inject(EnvironmentInjector)
 
 		// We want it to be initialized at start but not block the main thread
-		window.requestIdleCallback(() => {
+		setTimeout(() => {
 			runInInjectionContext(injector, () => {
 				void buildRouterMenus(routes, menuStacks, options).catch((error) => {
 					if (options.debug) {
@@ -30,6 +30,6 @@ export const provideRouterMenus = (
 					}
 				})
 			})
-		})
+		}, 10)
 	})
 }
