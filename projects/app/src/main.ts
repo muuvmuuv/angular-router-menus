@@ -1,5 +1,5 @@
 import { provideHttpClient, withFetch } from "@angular/common/http"
-import { provideExperimentalZonelessChangeDetection } from "@angular/core"
+import { enableProdMode, provideExperimentalZonelessChangeDetection } from "@angular/core"
 import { bootstrapApplication } from "@angular/platform-browser"
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async"
 import {
@@ -15,6 +15,10 @@ import { AppComponent } from "./app/app.component"
 import { environment } from "./environments/environment"
 import { menus } from "./menus"
 import { routes } from "./routes"
+
+if (environment.production) {
+	enableProdMode()
+}
 
 void bootstrapApplication(AppComponent, {
 	providers: [
