@@ -14,6 +14,7 @@ pnpm add angular-router-menus
   - [`main.ts`](#maints)
 - [Usage](#usage)
 - [Configuration](#configuration)
+  - [Menu](#menu)
 - [Examples](#examples)
 
 ## Installation
@@ -27,6 +28,7 @@ pnpm add angular-router-menus
    2. Adjust menus by your needs, you will configure them later
 4. Create a [`menus.ts`](#menusts) file, this will hold your `Menus` stack injection tokens
 5. In your [`main.ts`](#maints) file import and configure the library [as described](#maints) below
+   - A preloading strategy is required for it to work correctly
 
 ### `menus.ts`
 
@@ -49,7 +51,7 @@ export const menus: MenuStacks = {
 
 ```typescript
 import { bootstrapApplication } from "@angular/platform-browser";
-import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { provideRouter } from "@angular/router";
 
 import { provideRouterMenus } from "angular-router-menus";
 
@@ -59,7 +61,7 @@ import { routes } from "./routes";
 
 void bootstrapApplication(AppComponent, {
 	providers: [
-		provideRouter(routes, withComponentInputBinding()),
+		provideRouter(routes, withPreloading(NoPreloading)),
 		provideRouterMenus(routes, menus, {
 			defaultMenu: "main", // 👋🏻
 		}),
@@ -103,9 +105,12 @@ export class AppComponent {
 
 For details on menu items configuration, please take a look at the interfaces and its documentation here: [projects/angular-router-menus/src/lib/menu.ts](...)
 
-| Property      | Description                                       |
-| ------------- | ------------------------------------------------- |
-| `defaultMenu` | If not defined via `in` this is the default menu. |
+| Property      | Description                                                                                        |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| `defaultMenu` | If not defined via `in` this is the default menu.                                                  |
+| `debug`       | Set debugging otherwise nothing si thrown to prevent internal api's from telling to much nonsense. |
+
+### Menu
 
 ## Examples
 
