@@ -64,6 +64,7 @@ void bootstrapApplication(AppComponent, {
 		provideRouter(routes, withPreloading(NoPreloading)),
 		provideRouterMenus(routes, menus, {
 			defaultMenu: "main", // 👋🏻
+			debug: false,
 		}),
 	],
 }).catch((error) => {
