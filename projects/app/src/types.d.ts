@@ -1,4 +1,4 @@
 /**
  * All our menu locations.
  */
-declare type Menus = "main"
+declare type Menus = "main" | "aside"

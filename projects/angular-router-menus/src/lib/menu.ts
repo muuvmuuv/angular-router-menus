@@ -1,5 +1,3 @@
-import type { InjectionToken, WritableSignal } from "@angular/core"
-
 /**
  * Add the `menu` property to `Route`.
  */
@@ -46,22 +44,3 @@ export type RouteMenuItem = Partial<Omit<MenuItem, "children">>
  * @see {@link MenuItem}
  */
 export type MenuItems = MenuItem[]
-
-/**
- * Define your menu stacks.
- *
- * @see {@link MenuItems}
- * @see {@link Menus}
- *
- * @example
- * ```ts
- * const MENU_STACK = new InjectionToken<WritableSignal<MenuItems>>("MENU_STACK", {
- *   providedIn: "root",
- *   factory: () => signal([]),
- * })
- * const menuStacks: MenuStacks = {
- *   main: MENU_STACK,
- * }
- * ```
- */
-export type MenuStacks = Record<Menus, InjectionToken<WritableSignal<MenuItems>>>

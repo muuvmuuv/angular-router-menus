@@ -19,22 +19,6 @@
 							<span class="text-gray-600">Loading...</span>
 						}
 					</div>
-					<div class="flex items-center">
-						<span class="text-gray-600">|</span>
-					</div>
-					<div class="flex space-x-4">
-						@for (item of menu2(); track item.href) {
-							<a
-								[routerLink]="item.href"
-								routerLinkActive="text-white"
-								class="rounded-md px-3 py-2 text-sm font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-							>
-								{{ item.label }}2
-							</a>
-						} @empty {
-							<span class="text-gray-600">Loading...</span>
-						}
-					</div>
 				</div>
 			</div>
 		</div>

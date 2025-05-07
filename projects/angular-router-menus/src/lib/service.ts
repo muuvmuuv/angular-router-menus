@@ -8,12 +8,10 @@ export class RouterMenusService {
 	#menus = new Map<Menus, WritableSignal<MenuItems>>()
 
 	add(menu: Menus, items: MenuItems): void {
-		let _menu = this.#menus.get(menu)
-		if (_menu) {
+		if (this.#menus.has(menu)) {
 			throw new Error("Cannot add menu twice")
 		}
-		_menu = signal<MenuItems>(items)
-		this.#menus.set(menu, _menu)
+		this.#menus.set(menu, signal<MenuItems>(items))
 	}
 
 	use(menu: Menus): WritableSignal<MenuItems> {

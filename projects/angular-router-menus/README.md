@@ -10,8 +10,6 @@ pnpm add angular-router-menus
 > Zero dependencies and no performance bottleneck!
 
 - [Installation](#installation)
-  - [`menus.ts`](#menusts)
-  - [`main.ts`](#maints)
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Examples](#examples)
@@ -19,49 +17,21 @@ pnpm add angular-router-menus
 ## Installation
 
 1. Install the package
-2. Add these entries to your tsconfig.json of your application
-   - `angular-router-menus`: This ensures you have all required types globally
-   - `angular-router-menus/angular`: This patches Angular's Route(r) type with a new entry
-3. Create a type definition file and add this line
-   1. `declare type Menus = "main"`
+2. Create a type definition file or add to yours
+   1. `declare type Menus = "main" | "aside"`
    2. Adjust menus by your needs, you will configure them later
-4. Create a [`menus.ts`](#menusts) file, this will hold your `Menus` stack injection tokens
-5. In your [`main.ts`](#maints) file import and configure the library [as described](#maints) below
-
-### `menus.ts`
-
-```typescript
-import { InjectionToken, type WritableSignal, signal } from "@angular/core";
-
-import type { MenuItems, MenuStacks } from "angular-router-menus";
-
-export const MENU_STACK = new InjectionToken<WritableSignal<MenuItems>>("MENU_STACK", {
-	providedIn: "root",
-	factory: () => signal([]),
-});
-
-export const menus: MenuStacks = {
-	main: MENU_STACK,
-};
-```
-
-### `main.ts`
+3. In your [`main.ts`](#maints) file import and configure the library
+4. Make sure you have all your declared menus in the menus array
+5. You must need a preloading strategy because I use internal api's
+   - `NoPreloading` is the default in Angular
 
 ```typescript
-import { bootstrapApplication } from "@angular/platform-browser";
-import { provideRouter, withComponentInputBinding } from "@angular/router";
-
-import { provideRouterMenus } from "angular-router-menus";
-
-import { AppComponent } from "./app/app.component";
-import { menus } from "./menus";
-import { routes } from "./routes";
-
 void bootstrapApplication(AppComponent, {
 	providers: [
-		provideRouter(routes, withComponentInputBinding()),
-		provideRouterMenus(routes, menus, {
+		provideRouter(routes, withPreloading(NoPreloading)),
+		provideRouterMenus(routes, ["main"], {
 			defaultMenu: "main", // 👋🏻
+			debug: !environment.production,
 		}),
 	],
 }).catch((error) => {
@@ -72,11 +42,6 @@ void bootstrapApplication(AppComponent, {
 ## Usage
 
 ```typescript
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-
-import { MENU_STACK } from "../menus";
-
 @Component({
 	selector: "app-root",
 	templateUrl: "./app.component.html",
@@ -85,7 +50,7 @@ import { MENU_STACK } from "../menus";
 	imports: [RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class AppComponent {
-	readonly menu = inject(MENU_STACK); // 👋🏻
+	readonly menu = inject(RouterMenusService).use("main"); // 👋🏻
 }
 ```
 
@@ -103,9 +68,10 @@ export class AppComponent {
 
 For details on menu items configuration, please take a look at the interfaces and its documentation here: [projects/angular-router-menus/src/lib/menu.ts](...)
 
-| Property      | Description                                       |
-| ------------- | ------------------------------------------------- |
-| `defaultMenu` | If not defined via `in` this is the default menu. |
+| Property      | Description                                                       |
+| ------------- | ----------------------------------------------------------------- |
+| `defaultMenu` | If not defined via `in` this is the default menu.                 |
+| `debug`       | Enables debugging, because of internal API use I omit all errors. |
 
 ## Examples
 

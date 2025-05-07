@@ -1,5 +1,3 @@
-import type { Entries } from "type-fest"
-
 /**
  * normalize-path
  *
@@ -41,11 +39,4 @@ export function normalizePath(path: string, stripTrailing = true) {
  */
 export function sleep(milliseconds: number) {
 	return new Promise((resolve) => setTimeout(resolve, milliseconds))
-}
-
-/**
- * To object entries properly typed.
- */
-export function toEntries<T extends object>(obj: T) {
-	return Object.entries(obj) as Entries<T>
 }

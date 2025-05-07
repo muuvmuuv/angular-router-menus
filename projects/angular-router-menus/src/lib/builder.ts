@@ -1,14 +1,9 @@
-import {
-	EnvironmentInjector,
-	type WritableSignal,
-	assertInInjectionContext,
-	inject,
-} from "@angular/core"
+import { EnvironmentInjector, assertInInjectionContext, inject } from "@angular/core"
 import { RouterPreloader, type Routes } from "@angular/router"
 import { firstValueFrom } from "rxjs"
 
-import { normalizePath, toEntries } from "./helper"
-import type { MenuItem, MenuItems, MenuStacks } from "./menu"
+import { normalizePath } from "./helper"
+import type { MenuItem, MenuItems } from "./menu"
 import type { RouterMenusOptions } from "./options"
 import { RouterMenusService } from "./service"
 
@@ -126,39 +121,6 @@ function orderByPriority(items: MenuItems): MenuItems {
 }
 
 export async function buildRouterMenus(
-	routes: Routes,
-	menuStacks: MenuStacks,
-	options: RouterMenusOptions,
-) {
-	assertInInjectionContext(buildRouterMenus)
-
-	const injectedMenuStacks = {} as never as Record<Menus, WritableSignal<MenuItems>>
-	for (const [stack, token] of toEntries(menuStacks)) {
-		// We must inject them before all loops because we are not awaiting the builder
-		injectedMenuStacks[stack] = inject(token)
-	}
-
-	// 1. We need to resolve all lazy async children
-
-	await resolveLazyLoadedChildren(routes)
-
-	// 2. Remove all routes that do not contain a menu property
-
-	const filteredRoutes = filterRoutesWithMenu(routes)
-
-	// 3. Convert the filtered routes to menu items
-
-	const menuItems = convertRoutesToMenuItems(filteredRoutes, options)
-
-	// 4. Now we build the menu stack based on "in" which they are located
-
-	for (const [stack, token] of toEntries(injectedMenuStacks)) {
-		const stackMenu = orderByPriority(buildMenu(menuItems, stack))
-		token.set(stackMenu)
-	}
-}
-
-export async function buildRouterMenus2(
 	routes: Routes,
 	menus: Menus[],
 	options: RouterMenusOptions,
