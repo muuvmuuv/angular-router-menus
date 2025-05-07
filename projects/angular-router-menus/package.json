@@ -6,7 +6,9 @@
 	"keywords": ["angular", "angular-router", "router", "menu"],
 	"scripts": {
 		"build": "ng build",
-		"watch": "ng build --watch",
+		"watch": "ng build -c development --watch",
+		"prepublish": "ng build",
+		"release": "ng build && cd dist && npm publish",
 		"ng": "ng"
 	},
 	"dependencies": {

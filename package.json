@@ -5,6 +5,9 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
+		"build": "pnpm --filter=angular-router-menus build",
+		"watch": "pnpm --filter=angular-router-menus watch",
+		"release": "pnpm --filter=angular-router-menus release",
 		"serve": "pnpm --filter=app serve",
 		"lint": "biome check .",
 		"format": "biome check --unsafe --write ."
