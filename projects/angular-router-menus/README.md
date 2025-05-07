@@ -12,6 +12,7 @@ pnpm add angular-router-menus
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
+  - [MenuOptions](#menuoptions)
 - [Examples](#examples)
 
 ## Installation
@@ -68,10 +69,17 @@ export class AppComponent {
 
 For details on menu items configuration, please take a look at the interfaces and its documentation here: [projects/angular-router-menus/src/lib/menu.ts](...)
 
-| Property      | Description                                                       |
-| ------------- | ----------------------------------------------------------------- |
-| `defaultMenu` | If not defined via `in` this is the default menu.                 |
-| `debug`       | Enables debugging, because of internal API use I omit all errors. |
+| Property      | Description                                                                |
+| ------------- | -------------------------------------------------------------------------- |
+| `defaultMenu` | If not defined via `in` this is the default menu.                          |
+| `debug`       | Enables debugging, because of internal API use I omit all errors.          |
+| `menuOptions` | Object of menu name and an object. Please see [MenuOptions](#menuoptions). |
+
+### MenuOptions
+
+| Property    | Description                   |
+| ----------- | ----------------------------- |
+| `sortOrder` | Sort menu by "asc" or "desc". |
 
 ## Examples
 

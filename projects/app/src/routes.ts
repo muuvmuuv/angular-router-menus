@@ -13,6 +13,7 @@ export const routes = [
 			import("./app/features/home/home.component").then((m) => m.HomeFeature),
 		menu: {
 			in: "main", // optional
+			priority: 69,
 		},
 	},
 	{
@@ -20,6 +21,8 @@ export const routes = [
 		title: "Some",
 		loadComponent: () =>
 			import("./app/features/some/some.component").then((m) => m.SomeFeature),
-		menu: {},
+		menu: {
+			/* uses default values */
+		},
 	},
 ] satisfies Routes

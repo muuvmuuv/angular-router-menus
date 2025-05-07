@@ -4,7 +4,7 @@ import { firstValueFrom } from "rxjs"
 
 import { normalizePath } from "./helper"
 import type { MenuItem, MenuItems } from "./menu"
-import type { RouterMenusOptions } from "./options"
+import type { MenuSortOrder, RouterMenusOptions } from "./options"
 import { RouterMenusService } from "./service"
 
 async function resolveLazyLoadedChildren(routes: Routes) {
@@ -108,12 +108,17 @@ function buildMenu(data: MenuItems, inMenu: Menus) {
 	}, [])
 }
 
-function orderByPriority(items: MenuItems): MenuItems {
-	items.sort((a, b) => a.priority - b.priority)
+function orderByPriority(items: MenuItems, sortOrder: MenuSortOrder = "asc"): MenuItems {
+	items.sort((a, b) => {
+		if (sortOrder === "desc") {
+			return b.priority - a.priority
+		}
+		return a.priority - b.priority
+	})
 
 	for (const item of items) {
 		if (item.children) {
-			item.children = orderByPriority(item.children)
+			item.children = orderByPriority(item.children, sortOrder)
 		}
 	}
 
@@ -143,8 +148,12 @@ export async function buildRouterMenus(
 
 	// 4. Now we build the menu stack based on "in" which they are located
 
+	const mo = options.menuOptions ?? {}
+
 	for (const menu of menus) {
-		const stackMenu = orderByPriority(buildMenu(menuItems, menu))
-		routerMenusService.use(menu).set(stackMenu)
+		const menuOptions = mo[menu] ?? {}
+		const menus = buildMenu(menuItems, menu)
+		const sortedMenus = orderByPriority(menus, menuOptions.sortOrder)
+		routerMenusService.use(menu).set(sortedMenus)
 	}
 }

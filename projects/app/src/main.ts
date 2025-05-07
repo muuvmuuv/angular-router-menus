@@ -26,6 +26,11 @@ void bootstrapApplication(AppComponent, {
 		provideRouterMenus(routes, ["main", "aside"], {
 			defaultMenu: "main",
 			debug: !environment.production,
+			menuOptions: {
+				main: {
+					sortOrder: "desc",
+				},
+			},
 		}),
 		provideAnimationsAsync(),
 		provideHttpClient(withFetch()),
