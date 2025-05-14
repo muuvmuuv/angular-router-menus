@@ -13,6 +13,7 @@ import { provideRouterMenus } from "angular-router-menus"
 
 import { AppComponent } from "./app/app.component"
 import { environment } from "./environments/environment"
+import { provideIcons } from "./icons"
 import { routes } from "./routes"
 
 if (environment.production) {
@@ -34,6 +35,7 @@ void bootstrapApplication(AppComponent, {
 		}),
 		provideAnimationsAsync(),
 		provideHttpClient(withFetch()),
+		provideIcons(),
 	],
 }).catch((error) => {
 	console.error(error)

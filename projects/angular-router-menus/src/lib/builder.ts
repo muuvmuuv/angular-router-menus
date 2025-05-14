@@ -67,6 +67,7 @@ function convertRoutesToMenuItems(
 			label: "", // keep empty for later checks
 			priority: route.menu?.priority ?? 0,
 			in: route.menu?.in ?? options.defaultMenu,
+			icon: route.menu?.icon,
 			href,
 		}
 

@@ -23,6 +23,10 @@ export const routes = [
 			import("./app/features/some/some.component").then((m) => m.SomeFeature),
 		menu: {
 			/* uses default values */
+			/* and ... */
+			icon: {
+				name: "gem",
+			},
 		},
 	},
 ] satisfies Routes
