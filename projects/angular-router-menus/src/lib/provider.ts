@@ -28,10 +28,11 @@ export function provideRouterMenus(
 		// We want it to be initialized at start but not block the main thread
 		setTimeout(() => {
 			runInInjectionContext(injector, () => {
-				void buildRouterMenus(routes, menus, options).catch((error) => {
+				buildRouterMenus(routes, menus, options).catch((error) => {
 					if (options.debug) {
 						// Some internal types might throw but it appears that these aren't
 						// critical for the libraries functionality.
+						// biome-ignore lint/suspicious/noConsole: we need this information here
 						console.error(error)
 					}
 				})

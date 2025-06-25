@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from "@angular/core"
+import {
+	ChangeDetectionStrategy,
+	Component,
+	effect,
+	inject,
+} from "@angular/core"
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router"
 import { FaIconComponent } from "@fortawesome/angular-fontawesome"
-
 import { RouterMenusService } from "angular-router-menus"
 
 @Component({
@@ -16,7 +20,8 @@ export class AppComponent {
 
 	constructor() {
 		effect(() => {
-			console.log(this.menu())
+			// biome-ignore lint/suspicious/noConsole: we need this
+			console.log("Menu", this.menu())
 		})
 	}
 }

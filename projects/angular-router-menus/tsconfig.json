@@ -6,8 +6,7 @@
 		"declaration": true,
 		"declarationMap": true,
 		"sourceMap": true,
-		"inlineSources": true,
-		"lib": ["ES2022", "DOM", "DOM.Iterable"]
+		"inlineSources": true
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["src/**/*.spec.ts"]

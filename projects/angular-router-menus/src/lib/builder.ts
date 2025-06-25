@@ -1,4 +1,8 @@
-import { EnvironmentInjector, assertInInjectionContext, inject } from "@angular/core"
+import {
+	assertInInjectionContext,
+	EnvironmentInjector,
+	inject,
+} from "@angular/core"
 import { RouterPreloader, type Routes } from "@angular/router"
 import { firstValueFrom } from "rxjs"
 
@@ -22,7 +26,9 @@ async function resolveLazyLoadedChildren(routes: Routes) {
 				await resolveLazyLoop(route.children)
 			} else if (route.loadChildren) {
 				// NOTE: This might break as it uses private and internal api's
-				const importResolved = await firstValueFrom(loader.loadChildren(injector, route))
+				const importResolved = await firstValueFrom(
+					loader.loadChildren(injector, route),
+				)
 				// biome-ignore lint/suspicious/noExplicitAny: internal type
 				const _resolvedRoutes = (importResolved as any).routes as Routes
 				route.children = _resolvedRoutes
@@ -38,7 +44,10 @@ function filterRoutesWithMenu(routes: Routes) {
 	return routes.reduce<Routes>((accumulator, item) => {
 		if (item.menu) {
 			if (item.children) {
-				accumulator.push({ ...item, children: filterRoutesWithMenu(item.children) })
+				accumulator.push({
+					...item,
+					children: filterRoutesWithMenu(item.children),
+				})
 			} else {
 				accumulator.push(item)
 			}
@@ -76,11 +85,16 @@ function convertRoutesToMenuItems(
 			// the menu items later and to differ between real menu items and just
 			// paths that were required for the build process
 			menuItem.label =
-				route.menu.label ?? (typeof route.title === "string" ? route.title : "ERROR")
+				route.menu.label ??
+				(typeof route.title === "string" ? route.title : "ERROR")
 		}
 
 		if (route.children) {
-			menuItem.children = convertRoutesToMenuItems(route.children, options, menuItem)
+			menuItem.children = convertRoutesToMenuItems(
+				route.children,
+				options,
+				menuItem,
+			)
 		}
 
 		menuItems.push(menuItem)
@@ -95,7 +109,10 @@ function buildMenu(data: MenuItems, inMenu: Menus) {
 		// previous `convertRoutesToMenuItems` function.
 		if (item.label && item.in === inMenu) {
 			if (item.children) {
-				accumulator.push({ ...item, children: buildMenu(item.children, inMenu) })
+				accumulator.push({
+					...item,
+					children: buildMenu(item.children, inMenu),
+				})
 			} else {
 				accumulator.push(item)
 			}
@@ -109,7 +126,10 @@ function buildMenu(data: MenuItems, inMenu: Menus) {
 	}, [])
 }
 
-function orderByPriority(items: MenuItems, sortOrder: MenuSortOrder = "asc"): MenuItems {
+function orderByPriority(
+	items: MenuItems,
+	sortOrder: MenuSortOrder = "asc",
+): MenuItems {
 	items.sort((a, b) => {
 		if (sortOrder === "desc") {
 			return b.priority - a.priority

@@ -13,7 +13,7 @@
 		"format": "biome check --unsafe --write ."
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
+		"@biomejs/biome": "^2.0.5",
 		"@types/node": "^22.15.18",
 		"del-cli": "^6.0.0",
 		"prettier": "^3.5.3",
@@ -23,10 +23,17 @@
 		"node": ">=22"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["@biomejs/biome", "esbuild"],
+		"onlyBuiltDependencies": [
+			"@biomejs/biome",
+			"esbuild"
+		],
 		"peerDependencyRules": {
-			"ignoreMissing": ["zone.js"],
-			"allowAny": ["zone.js"]
+			"ignoreMissing": [
+				"zone.js"
+			],
+			"allowAny": [
+				"zone.js"
+			]
 		},
 		"overrides": {
 			"angular-router-menus": "link:./projects/angular-router-menus/dist"

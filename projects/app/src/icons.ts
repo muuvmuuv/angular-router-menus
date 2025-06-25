@@ -1,4 +1,8 @@
-import { type EnvironmentProviders, inject, provideAppInitializer } from "@angular/core"
+import {
+	type EnvironmentProviders,
+	inject,
+	provideAppInitializer,
+} from "@angular/core"
 import { FaConfig, FaIconLibrary } from "@fortawesome/angular-fontawesome"
 
 export function provideIcons(): EnvironmentProviders {

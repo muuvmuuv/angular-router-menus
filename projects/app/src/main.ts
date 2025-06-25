@@ -1,5 +1,8 @@
 import { provideHttpClient, withFetch } from "@angular/common/http"
-import { enableProdMode, provideExperimentalZonelessChangeDetection } from "@angular/core"
+import {
+	enableProdMode,
+	provideExperimentalZonelessChangeDetection,
+} from "@angular/core"
 import { bootstrapApplication } from "@angular/platform-browser"
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async"
 import {
@@ -8,7 +11,6 @@ import {
 	withComponentInputBinding,
 	withPreloading,
 } from "@angular/router"
-
 import { provideRouterMenus } from "angular-router-menus"
 
 import { AppComponent } from "./app/app.component"
@@ -20,10 +22,14 @@ if (environment.production) {
 	enableProdMode()
 }
 
-void bootstrapApplication(AppComponent, {
+bootstrapApplication(AppComponent, {
 	providers: [
 		provideExperimentalZonelessChangeDetection(),
-		provideRouter(routes, withPreloading(NoPreloading), withComponentInputBinding()),
+		provideRouter(
+			routes,
+			withPreloading(NoPreloading),
+			withComponentInputBinding(),
+		),
 		provideRouterMenus(routes, ["main", "aside"], {
 			defaultMenu: "main",
 			debug: !environment.production,
@@ -38,5 +44,6 @@ void bootstrapApplication(AppComponent, {
 		provideIcons(),
 	],
 }).catch((error) => {
+	// biome-ignore lint/suspicious/noConsole: we need this here
 	console.error(error)
 })

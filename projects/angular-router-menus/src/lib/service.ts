@@ -1,11 +1,12 @@
-import { Injectable, type WritableSignal, signal } from "@angular/core"
+import { Injectable, signal, type WritableSignal } from "@angular/core"
+
 import type { MenuItems } from "./menu"
 
 @Injectable({
 	providedIn: "root",
 })
 export class RouterMenusService {
-	#menus = new Map<Menus, WritableSignal<MenuItems>>()
+	readonly #menus = new Map<Menus, WritableSignal<MenuItems>>()
 
 	add(menu: Menus, items: MenuItems): void {
 		if (this.#menus.has(menu)) {

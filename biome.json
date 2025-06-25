@@ -1,15 +1,33 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
 	"files": {
-		"ignore": ["node_modules/", "dist/"]
+		"includes": ["**/*.js", "**/*.mjs", "**/*.ts", "**/*.json"]
 	},
-	"organizeImports": {
-		"enabled": true
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							":URL:",
+							":NODE:",
+							":PACKAGE:",
+							":PACKAGE_WITH_PROTOCOL:",
+							":BLANK_LINE:",
+							":ALIAS:",
+							":BLANK_LINE:",
+							":PATH:"
+						]
+					}
+				}
+			}
+		}
 	},
 	"formatter": {
 		"enabled": true,
@@ -17,8 +35,21 @@
 	},
 	"linter": {
 		"enabled": true,
+		"domains": {
+			"project": "none"
+		},
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"a11y": "error",
+			"nursery": {
+				"recommended": true
+			},
+			"performance": "error",
+			"security": "error",
+			"style": "error",
+			"correctness": "error",
+			"complexity": "error",
+			"suspicious": "error"
 		}
 	},
 	"javascript": {

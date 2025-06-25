@@ -1,3 +1,5 @@
+const PATH_REGEX = /[/\\]+/
+
 /**
  * normalize-path
  *
@@ -6,13 +8,15 @@
  * Copyright (c) 2014-2018, Jon Schlinkert.
  * Released under the MIT License.
  */
-export function normalizePath(path: string, stripTrailing = true) {
+export function normalizePath(path: string, stripTrailing = true): string {
 	if (path === "\\" || path === "/") {
 		return "/"
 	}
 
 	const length_ = path.length
-	if (length_ <= 1) return path
+	if (length_ <= 1) {
+		return path
+	}
 
 	// ensure that win32 namespaces has two leading slashes, so that the path is
 	// handled properly by the win32 version of path.parse() after being normalized
@@ -27,7 +31,7 @@ export function normalizePath(path: string, stripTrailing = true) {
 		}
 	}
 
-	const segs = path.split(/[/\\]+/)
+	const segs = path.split(PATH_REGEX)
 	if (stripTrailing && segs.at(-1) === "") {
 		segs.pop()
 	}
