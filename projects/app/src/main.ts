@@ -1,7 +1,8 @@
 import { provideHttpClient, withFetch } from "@angular/common/http"
 import {
 	enableProdMode,
-	provideExperimentalZonelessChangeDetection,
+	provideBrowserGlobalErrorListeners,
+	provideZonelessChangeDetection,
 } from "@angular/core"
 import { bootstrapApplication } from "@angular/platform-browser"
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async"
@@ -24,7 +25,8 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
 	providers: [
-		provideExperimentalZonelessChangeDetection(),
+		provideZonelessChangeDetection(),
+		provideBrowserGlobalErrorListeners(),
 		provideRouter(
 			routes,
 			withPreloading(NoPreloading),

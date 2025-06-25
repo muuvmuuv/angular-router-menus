@@ -8,27 +8,27 @@
 		"ng": "ng"
 	},
 	"dependencies": {
-		"@angular/animations": "~19.2.10",
-		"@angular/common": "~19.2.10",
-		"@angular/core": "~19.2.10",
-		"@angular/platform-browser": "~19.2.10",
-		"@angular/router": "~19.2.10",
-		"@fortawesome/angular-fontawesome": "^1.0.0",
+		"@angular/animations": "~20.0.4",
+		"@angular/common": "~20.0.4",
+		"@angular/core": "~20.0.4",
+		"@angular/platform-browser": "~20.0.4",
+		"@angular/router": "~20.0.4",
+		"@fortawesome/angular-fontawesome": "^2.0.1",
 		"@fortawesome/fontawesome-common-types": "^6.7.2",
 		"@fortawesome/free-regular-svg-icons": "^6.7.2",
-		"@tailwindcss/postcss": "^4.1.6",
+		"@tailwindcss/postcss": "^4.1.10",
 		"angular-router-menus": "link:../angular-router-menus/dist",
-		"postcss": "^8.5.3",
+		"postcss": "^8.5.6",
 		"rxjs": "^7.8.2",
-		"tailwindcss": "^4.1.6",
+		"tailwindcss": "^4.1.10",
 		"tslib": "^2.8.1",
 		"type-fest": "^4.41.0"
 	},
 	"devDependencies": {
-		"@angular/build": "~19.2.11",
-		"@angular/cli": "~19.2.11",
-		"@angular/compiler-cli": "~19.2.10",
-		"sass": "^1.88.0",
+		"@angular/build": "~20.0.3",
+		"@angular/cli": "~20.0.3",
+		"@angular/compiler-cli": "~20.0.4",
+		"sass": "^1.89.2",
 		"typescript": "5.8.2"
 	}
 }
