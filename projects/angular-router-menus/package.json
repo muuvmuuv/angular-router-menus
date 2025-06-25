@@ -1,6 +1,6 @@
 {
 	"name": "angular-router-menus",
-	"version": "2.1.0",
+	"version": "3.0.0",
 	"description": "Angular Router menus that build itself on-the-fly with options",
 	"license": "MIT",
 	"keywords": [
