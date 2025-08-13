@@ -37,10 +37,3 @@ export function normalizePath(path: string, stripTrailing = true): string {
 	}
 	return prefix + segs.join("/")
 }
-
-/**
- * Sleep for ms.
- */
-export function sleep(milliseconds: number) {
-	return new Promise((resolve) => setTimeout(resolve, milliseconds))
-}

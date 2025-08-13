@@ -26,7 +26,7 @@ export function provideRouterMenus(
 		}
 
 		// We want it to be initialized at start but not block the main thread
-		setTimeout(() => {
+		const initializeMenus = () => {
 			runInInjectionContext(injector, () => {
 				buildRouterMenus(routes, menus, options).catch((error) => {
 					if (options.debug) {
@@ -37,6 +37,13 @@ export function provideRouterMenus(
 					}
 				})
 			})
-		}, 100)
+		}
+
+		if (typeof requestIdleCallback !== "undefined") {
+			requestIdleCallback(initializeMenus, { timeout: 1000 })
+		} else {
+			// Fallback for environments without requestIdleCallback
+			setTimeout(initializeMenus, 100)
+		}
 	})
 }

@@ -3,7 +3,7 @@ import {
 	EnvironmentInjector,
 	inject,
 } from "@angular/core"
-import { RouterPreloader, type Routes } from "@angular/router"
+import { type Route, RouterPreloader, type Routes } from "@angular/router"
 import { firstValueFrom } from "rxjs"
 
 import { normalizePath } from "./helper"
@@ -11,7 +11,10 @@ import type { MenuItem, MenuItems } from "./menu"
 import type { MenuSortOrder, RouterMenusOptions } from "./options"
 import { RouterMenusService } from "./service"
 
-async function resolveLazyLoadedChildren(routes: Routes) {
+async function resolveLazyLoadedChildren(
+	routes: Routes,
+	options: RouterMenusOptions,
+) {
 	assertInInjectionContext(resolveLazyLoadedChildren)
 
 	const injector = inject(EnvironmentInjector)
@@ -20,24 +23,45 @@ async function resolveLazyLoadedChildren(routes: Routes) {
 	// @ts-expect-error The required method is not exported but private
 	const loader = routerPreloader.loader as RouterConfigLoader
 
+	async function processLazyRoute(route: Route, injector: EnvironmentInjector) {
+		try {
+			// NOTE: This might break as it uses private and internal api's
+			const importResolved = await firstValueFrom(
+				loader.loadChildren(injector, route),
+			)
+			// biome-ignore lint/suspicious/noExplicitAny: internal type
+			const _resolvedRoutes = (importResolved as any).routes as Routes
+			route.children = _resolvedRoutes
+			return _resolvedRoutes
+		} catch (error) {
+			// Skip this route if private API fails
+			if (options.debug) {
+				// biome-ignore lint/suspicious/noConsole: debug information
+				console.warn("Failed to resolve lazy route:", route.path, error)
+			}
+			return []
+		}
+	}
+
 	async function resolveLazyLoop(_routes: Routes) {
 		for (const route of _routes) {
 			if (route.children) {
 				await resolveLazyLoop(route.children)
 			} else if (route.loadChildren) {
-				// NOTE: This might break as it uses private and internal api's
-				const importResolved = await firstValueFrom(
-					loader.loadChildren(injector, route),
-				)
-				// biome-ignore lint/suspicious/noExplicitAny: internal type
-				const _resolvedRoutes = (importResolved as any).routes as Routes
-				route.children = _resolvedRoutes
-				await resolveLazyLoop(_resolvedRoutes)
+				const resolvedRoutes = await processLazyRoute(route, injector)
+				await resolveLazyLoop(resolvedRoutes)
 			}
 		}
 	}
 
 	await resolveLazyLoop(routes)
+}
+
+function hasMenuProperty(routes: Routes): boolean {
+	return routes.some(
+		(route) =>
+			route.menu || (route.children && hasMenuProperty(route.children)),
+	)
 }
 
 function filterRoutesWithMenu(routes: Routes) {
@@ -155,9 +179,14 @@ export async function buildRouterMenus(
 
 	const routerMenusService = inject(RouterMenusService)
 
+	// Early exit if no routes have menu properties
+	if (!hasMenuProperty(routes)) {
+		return
+	}
+
 	// 1. We need to resolve all lazy async children
 
-	await resolveLazyLoadedChildren(routes)
+	await resolveLazyLoadedChildren(routes, options)
 
 	// 2. Remove all routes that do not contain a menu property
 

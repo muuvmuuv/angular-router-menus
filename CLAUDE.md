@@ -8,7 +8,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm serve` - Run the demo application with hot reload
 - `pnpm build` - Build the angular-router-menus library  
 - `pnpm watch` - Build the library in watch mode
-- `pnpm release` - Build and publish the library to npm
+
+### Release Process
+To release the library to npm:
+1. `pnpm --filter=angular-router-menus release` - This will:
+   - Build the library with `ng build` 
+   - Navigate to the `dist/` folder (the built output)
+   - Publish from the dist folder using `npm publish`
+
+**Important:** The library must be published from the `dist/` folder, not the project root, because:
+- Angular builds create the proper package.json with correct entry points
+- The dist folder contains the compiled library code that consumers need
+- The source project folder contains development files not meant for npm
 
 ### Workspace Commands
 Use pnpm workspace filtering to run commands in specific projects:
