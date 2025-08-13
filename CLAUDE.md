@@ -10,6 +10,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm watch` - Build the library in watch mode
 - `pnpm release` - Build and publish the library to npm
 
+### Workspace Commands
+Use pnpm workspace filtering to run commands in specific projects:
+- `pnpm --filter=angular-router-menus <command>` - Run command in library project
+- `pnpm --filter=app <command>` - Run command in demo app project
+- `pnpm --filter=angular-router-menus build` - Build only the library
+- `pnpm --filter=app build` - Build only the demo app
+- `pnpm --filter=angular-router-menus exec ng <command>` - Run Angular CLI in library
+- `pnpm --filter=app exec ng <command>` - Run Angular CLI in demo app
+
 ### Code Quality
 - `pnpm lint` - Run Biome linter to check code quality
 - `pnpm format` - Format code and apply fixes with Biome
@@ -96,9 +105,10 @@ When upgrading dependencies:
 2. **Manual process** (if needed):
    - Check outdated packages: `pnpm outdated -r`
    - Update Angular packages while maintaining version compatibility
+   - Use workspace filters instead of cd: `pnpm --filter=<project> <command>`
    - Ensure TypeScript version matches Angular requirements (usually 5.8.x for Angular 20)
    - Update peer dependencies in library package.json if needed
-3. **Test builds**: Always test both `pnpm build` (library) and `pnpm --filter=app build` 
+3. **Test builds**: Always test both `pnpm build` (library) and `pnpm --filter=app build` (app) 
 4. **Fix peer dependency mismatches**: Add missing Angular packages to dependencies if needed
 5. **Run linting**: Use `pnpm lint` and `pnpm format` to check and fix issues
 
