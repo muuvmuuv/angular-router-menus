@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm:*)",
+      "WebFetch(domain:biomejs.dev)",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

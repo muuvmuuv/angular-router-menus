@@ -1,12 +1,26 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.1.4/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["**/*.js", "**/*.mjs", "**/*.ts", "**/*.json"]
+		"includes": [
+			"projects/*/src/**/*.ts",
+			"projects/*/src/**/*.js",
+			"upgrade.fish",
+			"*.json",
+			"!**/node_modules/**",
+			"!**/dist/**",
+			"!**/.angular/**",
+			"!**/package-lock.json",
+			"!**/pnpm-lock.yaml",
+			"!projects/*/angular.json",
+			"!projects/*/tsconfig*.json",
+			"!projects/*/*.json"
+		],
+		"ignoreUnknown": true
 	},
 	"assist": {
 		"actions": {

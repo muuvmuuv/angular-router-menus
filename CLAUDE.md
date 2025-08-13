@@ -12,7 +12,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Code Quality
 - `pnpm lint` - Run Biome linter to check code quality
-- `pnpm format` - Format code with Biome (modifies files)
+- `pnpm format` - Format code and apply fixes with Biome
+
+### Upgrade Workflow
+- `./upgrade.fish` - Automated dependency upgrade script that:
+  1. Updates root workspace dependencies
+  2. Updates Angular packages in both library and app
+  3. Automatically detects and sets correct TypeScript version
+  4. Installs all dependencies and resolves peer dependencies
+  5. Shows remaining outdated packages
 
 ## Architecture
 
@@ -80,10 +88,38 @@ Example Angular app demonstrating library usage with:
    - Enable debug mode to see errors in console
    - Menu service throws if accessing non-existent menus
 
+## Upgrade Process
+
+When upgrading dependencies:
+
+1. **Use the upgrade script**: Run `./upgrade.fish` for automated upgrades
+2. **Manual process** (if needed):
+   - Check outdated packages: `pnpm outdated -r`
+   - Update Angular packages while maintaining version compatibility
+   - Ensure TypeScript version matches Angular requirements (usually 5.8.x for Angular 20)
+   - Update peer dependencies in library package.json if needed
+3. **Test builds**: Always test both `pnpm build` (library) and `pnpm --filter=app build` 
+4. **Fix peer dependency mismatches**: Add missing Angular packages to dependencies if needed
+5. **Run linting**: Use `pnpm lint` and `pnpm format` to check and fix issues
+
+Common issues:
+- TypeScript version conflicts: Angular 20 requires TypeScript ^5.8.x, not 5.9+
+- Missing @angular/compiler: Add as dependency, not just devDependency
+- Peer dependency mismatches: Ensure all Angular packages are same version
+- Node.js types mismatch: `@types/node` must match Node.js version in `.prototools`
+
 ## Dependencies
 
 - Angular 20+ with standalone components
-- Node.js 22+
-- pnpm package manager
+- Node.js 22+ (managed via Proto tools - see `.prototools`)
+- pnpm 10+ (managed via Proto tools - see `.prototools`)
 - Biome for linting/formatting (configured in `biome.json`)
 - TypeScript with strict mode enabled
+
+## Development Environment
+
+This project uses [Proto](https://moonrepo.dev/proto) for managing development tools:
+- `.prototools` defines Node.js ^22 and pnpm ^10 versions
+- Run `proto install` to install the correct versions
+- Proto ensures all developers use consistent tool versions
+- `@types/node` should match the Node.js version specified in `.prototools`
