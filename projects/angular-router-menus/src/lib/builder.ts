@@ -23,7 +23,7 @@ async function resolveLazyLoadedChildren(
 	// @ts-expect-error The required method is not exported but private
 	const loader = routerPreloader.loader as RouterConfigLoader
 
-	async function processLazyRoute(route: Route, injector: EnvironmentInjector) {
+	async function processLazyRoute(route: Route) {
 		try {
 			// NOTE: This might break as it uses private and internal api's
 			const importResolved = await firstValueFrom(
@@ -44,26 +44,20 @@ async function resolveLazyLoadedChildren(
 	}
 
 	async function resolveLazyLoop(_routes: Routes) {
-		for (const route of _routes) {
-			if (route.children) {
-				await resolveLazyLoop(route.children)
-			} else if (route.loadChildren) {
-				const resolvedRoutes = await processLazyRoute(route, injector)
-				await resolveLazyLoop(resolvedRoutes)
-			}
-		}
+		await Promise.all(
+			_routes.map(async (route) => {
+				if (route.children) {
+					await resolveLazyLoop(route.children)
+				} else if (route.loadChildren) {
+					const resolvedRoutes = await processLazyRoute(route)
+					await resolveLazyLoop(resolvedRoutes)
+				}
+			}),
+		)
 	}
 
 	await resolveLazyLoop(routes)
 }
-
-function hasMenuProperty(routes: Routes): boolean {
-	return routes.some(
-		(route) =>
-			route.menu || (route.children && hasMenuProperty(route.children)),
-	)
-}
-
 function filterRoutesWithMenu(routes: Routes) {
 	return routes.reduce<Routes>((accumulator, item) => {
 		if (item.menu) {
@@ -178,11 +172,6 @@ export async function buildRouterMenus(
 	assertInInjectionContext(buildRouterMenus)
 
 	const routerMenusService = inject(RouterMenusService)
-
-	// Early exit if no routes have menu properties
-	if (!hasMenuProperty(routes)) {
-		return
-	}
 
 	// 1. We need to resolve all lazy async children
 

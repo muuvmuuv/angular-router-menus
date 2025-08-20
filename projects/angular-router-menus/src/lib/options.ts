@@ -1,4 +1,9 @@
 /**
+ * Registration timeout for idle handler.
+ */
+export const REGISTRATION_TIMEOUT = 333
+
+/**
  * Menu sort orders
  */
 export type MenuSortOrder = "desc" | "asc"

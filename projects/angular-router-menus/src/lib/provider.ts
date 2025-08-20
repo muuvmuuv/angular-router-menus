@@ -8,7 +8,7 @@ import {
 import type { Routes } from "@angular/router"
 
 import { buildRouterMenus } from "./builder"
-import type { RouterMenusOptions } from "./options"
+import { REGISTRATION_TIMEOUT, type RouterMenusOptions } from "./options"
 import { RouterMenusService } from "./service"
 
 export function provideRouterMenus(
@@ -40,14 +40,14 @@ export function provideRouterMenus(
 		}
 
 		if (typeof requestIdleCallback !== "undefined") {
-			requestIdleCallback(initializeMenus, { timeout: 100 })
+			requestIdleCallback(initializeMenus, { timeout: REGISTRATION_TIMEOUT })
 		} else {
 			// Fallback for environments without requestIdleCallback
 			if (options.debug) {
 				// biome-ignore lint/suspicious/noConsole: we must inform for debugging
 				console.warn("Fallback to setTimeout, no requestIdleCallback available")
 			}
-			setTimeout(initializeMenus, 100)
+			setTimeout(initializeMenus, REGISTRATION_TIMEOUT)
 		}
 	})
 }
