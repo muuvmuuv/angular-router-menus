@@ -6,21 +6,29 @@
 		"useIgnoreFile": true
 	},
 	"files": {
+		"ignoreUnknown": true,
 		"includes": [
-			"projects/*/src/**/*.ts",
-			"projects/*/src/**/*.js",
-			"upgrade.fish",
 			"*.json",
-			"!**/node_modules/**",
-			"!**/dist/**",
-			"!**/.angular/**",
-			"!**/package-lock.json",
-			"!**/pnpm-lock.yaml",
-			"!projects/*/angular.json",
-			"!projects/*/tsconfig*.json",
-			"!projects/*/*.json"
-		],
-		"ignoreUnknown": true
+			"*.jsonc",
+			"*.mjs",
+			"*.ts",
+			"*.tsx",
+			"*.js",
+			"*.jsx",
+			"*.css",
+			"projects/**/*.json",
+			"projects/**/*.jsonc",
+			"projects/**/*.mjs",
+			"projects/**/*.ts",
+			"projects/**/*.tsx",
+			"projects/**/*.js",
+			"projects/**/*.jsx",
+			"projects/**/*.css",
+			"projects/**/*.graphql",
+			"!**/node_modules",
+			"!**/dist",
+			"!**/.angular"
+		]
 	},
 	"assist": {
 		"actions": {

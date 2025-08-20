@@ -13,8 +13,8 @@
 		"format": "biome check --unsafe --write ."
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.1.4",
-		"@types/node": "^22.17.1",
+		"@biomejs/biome": "^2.2.0",
+		"@types/node": "^22.17.2",
 		"del-cli": "^6.0.0",
 		"prettier": "^3.6.2",
 		"typescript": "5.8.3"

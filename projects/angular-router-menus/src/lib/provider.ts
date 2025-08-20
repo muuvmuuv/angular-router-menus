@@ -40,9 +40,13 @@ export function provideRouterMenus(
 		}
 
 		if (typeof requestIdleCallback !== "undefined") {
-			requestIdleCallback(initializeMenus, { timeout: 1000 })
+			requestIdleCallback(initializeMenus, { timeout: 100 })
 		} else {
 			// Fallback for environments without requestIdleCallback
+			if (options.debug) {
+				// biome-ignore lint/suspicious/noConsole: we must inform for debugging
+				console.warn("Fallback to setTimeout, no requestIdleCallback available")
+			}
 			setTimeout(initializeMenus, 100)
 		}
 	})
