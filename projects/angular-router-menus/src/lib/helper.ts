@@ -22,6 +22,7 @@ export function normalizePath(path: string, stripTrailing = true): string {
 	// handled properly by the win32 version of path.parse() after being normalized
 	// https://msdn.microsoft.com/library/windows/desktop/aa365247(v=vs.85).aspx#namespaces
 	let prefix = ""
+	// biome-ignore lint/style/noMagicNumbers: why
 	if (length_ > 4 && path[3] === "\\") {
 		const ch = path[2]
 		if ((ch === "?" || ch === ".") && path.startsWith("\\\\")) {
