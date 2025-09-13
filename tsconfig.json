@@ -43,5 +43,7 @@
 		"extendedDiagnostics": {
 			"defaultCategory": "error"
 		}
-	}
+	},
+	"files": [],
+	"include": []
 }

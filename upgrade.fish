@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 # Get the latest Angular major version from the library's package.json
-set ANGULAR_VERSION "^20.1.0"
+set ANGULAR_VERSION "^20.3.0"
 
 echo "🚀 Starting Angular upgrade process ..."
 
