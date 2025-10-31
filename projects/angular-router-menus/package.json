@@ -1,6 +1,6 @@
 {
 	"name": "angular-router-menus",
-	"version": "20.3.1",
+	"version": "20.3.2",
 	"description": "Angular Router menus that build itself on-the-fly with options",
 	"license": "MIT",
 	"keywords": [
@@ -44,8 +44,8 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/muuvmuuv/angular-extended-builders",
-		"directory": "projects/angular-extended-builder"
+		"url": "https://github.com/muuvmuuv/angular-router-menus",
+		"directory": "projects/angular-router-menus"
 	},
 	"engines": {
 		"node": ">=22"
