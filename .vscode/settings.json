@@ -1,24 +1,30 @@
 {
-	"editor.formatOnSave": true,
-	"vsicons.presets.angular": true,
-	"stylelint.packageManager": "pnpm",
-	"npm.packageManager": "pnpm",
-	"typescript.preferences.importModuleSpecifier": "relative",
-	"typescript.tsdk": "node_modules/typescript/lib",
 	"[html]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-	"[json][jsonc][json5]": {
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[jsonc]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"[javascript][typescript]": {
 		"editor.defaultFormatter": "biomejs.biome",
 		"editor.codeActionsOnSave": {
-			"source.organizeImports.biome": "explicit"
+			"source.fixAll.eslint": "explicit",
+			"source.fixAll.biome": "explicit",
+			"source.organizeImports.biome": "explicit",
+			"source.action.useSortedKeys.biome": "explicit"
 		}
 	},
-	"editor.codeActionsOnSave": {
-		"quickfix.biome": "explicit"
+	"[javascriptreact][typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit",
+			"source.fixAll.biome": "explicit",
+			"source.organizeImports.biome": "explicit",
+			"source.action.useSortedKeys.biome": "explicit"
+		}
 	},
-	"biome.rename": true
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

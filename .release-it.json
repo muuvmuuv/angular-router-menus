@@ -1,0 +1,22 @@
+{
+	"git": {
+		"commitMessage": "build: release v${version}",
+		"tagName": "v${version}",
+		"requireCleanWorkingDir": true,
+		"requireBranch": "main"
+	},
+	"github": {
+		"release": false
+	},
+	"npm": {
+		"publish": false
+	},
+	"hooks": {
+		"before:init": "pnpm check"
+	},
+	"plugins": {
+		"@release-it/bumper": {
+			"out": ["projects/angular-router-menus/package.json"]
+		}
+	}
+}

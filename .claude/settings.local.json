@@ -1,13 +1,13 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(pnpm:*)",
-      "WebFetch(domain:biomejs.dev)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:angular.dev)"
-    ],
-    "deny": []
-  }
+	"permissions": {
+		"allow": [
+			"Bash(pnpm:*)",
+			"WebFetch(domain:biomejs.dev)",
+			"Bash(git add:*)",
+			"Bash(git commit:*)",
+			"WebFetch(domain:github.com)",
+			"WebFetch(domain:angular.dev)"
+		],
+		"deny": []
+	}
 }
