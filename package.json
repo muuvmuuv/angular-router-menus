@@ -8,7 +8,7 @@
 		"build": "pnpm --filter=angular-router-menus build",
 		"watch": "pnpm --filter=angular-router-menus watch",
 		"serve": "pnpm --filter=app serve",
-		"lint": "biome check .",
+		"check": "biome check .",
 		"format": "biome check --unsafe --write ."
 	},
 	"devDependencies": {
