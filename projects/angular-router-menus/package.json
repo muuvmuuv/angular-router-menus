@@ -12,7 +12,6 @@
 	"scripts": {
 		"build": "ng build",
 		"watch": "ng build -c development --watch",
-		"prepublish": "exit 1",
 		"ng": "ng"
 	},
 	"dependencies": {
