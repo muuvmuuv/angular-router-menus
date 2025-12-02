@@ -1,5 +1,5 @@
 {
-	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"$schema": "./node_modules/angular-extended-builder/dist/schema.json",
 	"version": 1,
 	"cli": {
 		"packageManager": "pnpm",
@@ -41,11 +41,49 @@
 					},
 					"defaultConfiguration": "production"
 				},
+				"build-extended": {
+					"builder": "angular-extended-builder:application",
+					"options": {
+						"browser": "./src/main.ts",
+						"index": "./src/index.html",
+						"outputPath": "./dist",
+						"tsConfig": "./tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"crossOrigin": "anonymous",
+						"styles": ["./src/styles.scss"],
+						"assets": [
+							{
+								"input": "./public",
+								"glob": "**/*"
+							}
+						],
+						"plugins": ["./tools/plugin-define.ts"],
+						"indexHtmlTransformer": "./tools/index-html-transform.ts"
+					},
+					"configurations": {
+						"development": {
+							"sourceMap": true,
+							"extractLicenses": false,
+							"optimization": false,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "development"
+				},
 				"serve": {
 					"builder": "@angular/build:dev-server",
 					"configurations": {
 						"development": {
 							"buildTarget": "app:build:development"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"serve-extended": {
+					"builder": "angular-extended-builder:dev-server",
+					"configurations": {
+						"development": {
+							"buildTarget": "app:build-extended:development"
 						}
 					},
 					"defaultConfiguration": "development"

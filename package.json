@@ -8,29 +8,28 @@
 		"build": "pnpm --filter=angular-router-menus build",
 		"watch": "pnpm --filter=angular-router-menus watch",
 		"serve": "pnpm --filter=app serve",
+		"serve-extended": "pnpm --filter=app serve-extended",
 		"build-app": "pnpm --filter=app build",
 		"check": "biome check .",
 		"format": "biome check --unsafe --write ."
 	},
 	"devDependencies": {
+		"@angular-devkit/architect": "^0.2100.1",
+		"@angular-devkit/build-angular": "^21.0.1",
+		"@angular-devkit/core": "^21.0.1",
+		"@angular/build": "^21.0.1",
+		"@angular/cli": "^21.0.1",
+		"@angular/compiler-cli": "^21.0.2",
 		"@biomejs/biome": "^2.3.8",
 		"@release-it/bumper": "^7.0.5",
 		"@types/node": "^24.10.1",
 		"del-cli": "^7.0.0",
+		"ng-packagr": "^21.0.0",
 		"prettier": "^3.7.3",
 		"release-it": "^19.0.6",
 		"typescript": "5.9.3"
 	},
 	"engines": {
 		"node": ">=22"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@biomejs/biome",
-			"esbuild"
-		],
-		"overrides": {
-			"angular-router-menus": "link:./projects/angular-router-menus/dist"
-		}
 	}
 }

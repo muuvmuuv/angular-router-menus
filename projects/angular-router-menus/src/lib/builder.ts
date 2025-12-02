@@ -21,7 +21,11 @@ async function resolveLazyLoadedChildren(
 	const routerPreloader = inject(RouterPreloader)
 
 	// @ts-expect-error The required method is not exported but private
-	const loader = routerPreloader.loader as RouterConfigLoader
+	const loader = routerPreloader.loader
+	if (!loader && options.debug) {
+		// biome-ignore lint/suspicious/noConsole: report api
+		console.warn("Loader not present", routerPreloader)
+	}
 
 	async function processLazyRoute(route: Route) {
 		try {

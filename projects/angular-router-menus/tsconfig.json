@@ -2,14 +2,19 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"baseUrl": ".",
-		"outDir": "./out-tsc",
-		"moduleResolution": "Bundler",
-		"esModuleInterop": true,
-		"declaration": true,
-		"declarationMap": true,
-		"sourceMap": true,
-		"inlineSources": true
+		"outDir": "./out-tsc"
 	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["src/**/*.spec.ts"]
+	"files": [],
+	"include": [],
+	"references": [
+		{
+			"path": "tsconfig.lib.json"
+		},
+		{
+			"path": "tsconfig.editor.json"
+		},
+		{
+			"path": "tsconfig.prod.json"
+		}
+	]
 }

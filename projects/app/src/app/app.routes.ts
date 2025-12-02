@@ -10,7 +10,7 @@ export const routes = [
 		path: "home",
 		title: "Home",
 		loadComponent: () =>
-			import("./app/features/home/home.component").then((m) => m.HomeFeature),
+			import("./features/home/home.component").then((m) => m.HomeFeature),
 		menu: {
 			in: "main", // optional
 			priority: 69,
@@ -20,7 +20,8 @@ export const routes = [
 		path: "some",
 		title: "Some",
 		loadComponent: () =>
-			import("./app/features/some/some.component").then((m) => m.SomeFeature),
+			import("./features/some/some.component").then((m) => m.SomeFeature),
+		preload: true,
 		menu: {
 			/* uses default values */
 			/* and ... */

@@ -1,49 +1,12 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"compileOnSave": false,
-	"compilerOptions": {
-		"strict": true,
-		"noImplicitAny": true,
-		"noImplicitReturns": true,
-		"noImplicitThis": true,
-		"noImplicitOverride": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUncheckedSideEffectImports": true,
-		"forceConsistentCasingInFileNames": true,
-		"useDefineForClassFields": false,
-		"allowSyntheticDefaultImports": true,
-		"strictPropertyInitialization": true,
-		"experimentalDecorators": true,
-		"strictNullChecks": true,
-		"isolatedModules": true,
-		"sourceMap": false,
-		"inlineSourceMap": false,
-		"allowJs": true,
-		"composite": false,
-		"declaration": true,
-		"declarationMap": true,
-		"incremental": true,
-		"resolveJsonModule": true,
-		"noEmitOnError": true,
-		"skipLibCheck": true,
-		"importHelpers": true,
-		"moduleResolution": "Bundler",
-		"module": "ES2022",
-		"target": "ES2022",
-		"lib": ["ES2022", "DOM", "DOM.Iterable"]
-	},
-	"angularCompilerOptions": {
-		"disableTypeScriptVersionCheck": true,
-		"enableResourceInlining": false,
-		"enableI18nLegacyMessageIdFormat": false,
-		"fullTemplateTypeCheck": true,
-		"strictInjectionParameters": true,
-		"strictInputAccessModifiers": true,
-		"strictTemplates": true,
-		"extendedDiagnostics": {
-			"defaultCategory": "error"
-		}
-	},
+	"extends": "./tsconfig.base.json",
 	"files": [],
-	"include": []
+	"references": [
+		{
+			"path": "projects/angular-router-menus"
+		},
+		{
+			"path": "projects/app"
+		}
+	]
 }

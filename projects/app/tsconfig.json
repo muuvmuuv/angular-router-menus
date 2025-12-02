@@ -2,8 +2,16 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"baseUrl": ".",
-		"moduleResolution": "bundler",
-		"esModuleInterop": true,
-		"types": []
-	}
+		"outDir": "./out-tsc"
+	},
+	"files": [],
+	"include": [],
+	"references": [
+		{
+			"path": "tsconfig.app.json"
+		},
+		{
+			"path": "tsconfig.editor.json"
+		}
+	]
 }
