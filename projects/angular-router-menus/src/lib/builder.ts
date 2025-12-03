@@ -4,7 +4,6 @@ import {
 	inject,
 } from "@angular/core"
 import { type Route, RouterPreloader, type Routes } from "@angular/router"
-import { firstValueFrom } from "rxjs"
 
 import { normalizePath } from "./helper"
 import type { MenuItem, MenuItems } from "./menu"
@@ -20,6 +19,7 @@ async function resolveLazyLoadedChildren(
 	const injector = inject(EnvironmentInjector)
 	const routerPreloader = inject(RouterPreloader)
 
+	// See: node_modules/.pnpm/@angular+router@21.0.2_@angular+common@21.0.2_@angular+core@21.0.2_@angular+compiler@21_d09b06b8fb94bcf87a1d6f9383a070c0/node_modules/@angular/router/types/router.d.ts:311
 	// @ts-expect-error The required method is not exported but private
 	const loader = routerPreloader.loader
 	if (!loader && options.debug) {
@@ -29,12 +29,11 @@ async function resolveLazyLoadedChildren(
 
 	async function processLazyRoute(route: Route) {
 		try {
+			// ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️
 			// NOTE: This might break as it uses private and internal api's
-			const importResolved = await firstValueFrom(
-				loader.loadChildren(injector, route),
-			)
-			// biome-ignore lint/suspicious/noExplicitAny: internal type
-			const _resolvedRoutes = (importResolved as any).routes as Routes
+			// See: node_modules/.pnpm/@angular+router@21.0.2_@angular+common@21.0.2_@angular+core@21.0.2_@angular+compiler@21_d09b06b8fb94bcf87a1d6f9383a070c0/node_modules/@angular/router/types/router.d.ts:228
+			const importResolved = await loader.loadChildren(injector, route)
+			const _resolvedRoutes = importResolved.routes as Routes
 			route.children = _resolvedRoutes
 			return _resolvedRoutes
 		} catch (error) {
