@@ -61,6 +61,7 @@ async function resolveLazyLoadedChildren(
 
 	await resolveLazyLoop(routes)
 }
+
 function filterRoutesWithMenu(routes: Routes) {
 	return routes.reduce<Routes>((accumulator, item) => {
 		if (item.menu) {
