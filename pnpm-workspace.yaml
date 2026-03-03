@@ -1,6 +1,9 @@
 packages:
   - projects/*
 
+ignoredBuiltDependencies:
+  - less
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
