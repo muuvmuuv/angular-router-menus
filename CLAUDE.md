@@ -14,10 +14,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 To release the library to npm:
 
-1. `pnpm --filter=angular-router-menus release` - This will:
-   - Build the library with `ng build`
-   - Navigate to the `dist/` folder (the built output)
-   - Publish from the dist folder using `npm publish`
+1. `pnpm --filter=angular-router-menus release` - Uses release-it which will:
+   - Run `pnpm check` as a pre-release hook
+   - Bump version in `projects/angular-router-menus/package.json` (via @release-it/bumper)
+   - Create a git commit (`build: release v<version>`) and tag (`v<version>`)
+   - Requires a clean working directory and the `main` branch
+   - Does **not** publish to npm directly — publishing is triggered by the GitHub Actions `publish.yml` workflow when a `v*` tag is pushed
 
 **Important:** The library must be published from the `dist/` folder, not the project root, because:
 
@@ -38,9 +40,9 @@ Use pnpm workspace filtering to run commands in specific projects:
 
 ### Code Quality
 
-- `pnpm lint` - Run oxlint to check code quality
-- `pnpm format` - Format code with oxfmt
-- `pnpm format:check` - Check formatting without writing changes
+- `pnpm check` - Run oxlint and oxfmt --check (lint + format verification)
+- `pnpm format` - Run oxlint --fix and oxfmt (auto-fix lint issues + format code)
+- `pnpm build-app` - Build only the demo application
 
 ### Upgrade Workflow
 
@@ -50,6 +52,16 @@ Use pnpm workspace filtering to run commands in specific projects:
   3. Automatically detects and sets correct TypeScript version
   4. Installs all dependencies and resolves peer dependencies
   5. Shows remaining outdated packages
+
+### Git Hooks (Lefthook)
+
+The project uses lefthook for git hooks:
+
+- **pre-commit**: Runs oxlint on staged files + oxfmt --check on staged files
+- **commit-msg**: Runs commitlint with `@commitlint/config-angular` convention
+
+Commit messages must follow the Angular convention: `type(scope): subject`
+Common types: `feat`, `fix`, `build`, `docs`, `refactor`, `test`, `chore`
 
 ## Architecture
 
@@ -102,7 +114,7 @@ Example Angular app demonstrating library usage with:
 
 1. **Route Processing Flow**:
    - Routes with `menu` property are collected recursively
-   - Lazy routes are resolved using Angular's internal `RouterConfigLoader`
+   - Lazy routes are resolved using Angular's internal `RouterPreloader` (private `loader` API)
    - Paths are normalized and concatenated from parent routes
    - Menu items inherit route titles if no label specified
 
@@ -115,8 +127,8 @@ Example Angular app demonstrating library usage with:
 
 3. **Initialization Strategy**:
    - Menus are registered synchronously during app initialization
-   - Building happens asynchronously (100ms delay) to avoid blocking
-   - Requires a RouterPreloader strategy (e.g., NoPreloading)
+   - Building is deferred via `requestIdleCallback` with a 333ms timeout (`REGISTRATION_TIMEOUT`) to avoid blocking the main thread
+   - Requires a preloading strategy (e.g., `NoPreloading`, the Angular default)
 
 4. **Error Handling**:
    - Internal API usage errors are caught and suppressed
@@ -140,25 +152,25 @@ When upgrading dependencies:
 
 Common issues:
 
-- TypeScript version conflicts: Angular 20 requires TypeScript ^5.8.x, not 5.9+
+- TypeScript version conflicts: Check what the current Angular version requires
 - Missing @angular/compiler: Add as dependency, not just devDependency
 - Peer dependency mismatches: Ensure all Angular packages are same version
 - Node.js types mismatch: `@types/node` must match Node.js version in `.prototools`
 
 ## Dependencies
 
-- Angular 20+ with standalone components
-- Node.js 22+ (managed via Proto tools - see `.prototools`)
+- Angular 21+ with standalone components
+- Node.js 24+ (managed via Proto tools - see `.prototools`)
 - pnpm 10+ (managed via Proto tools - see `.prototools`)
 - oxlint for linting (configured in `.oxlintrc.json`)
 - oxfmt for formatting (configured in `.oxfmtrc.json`)
-- TypeScript with strict mode enabled
+- TypeScript 5.9+ with strict mode enabled
 
 ## Development Environment
 
 This project uses [Proto](https://moonrepo.dev/proto) for managing development tools:
 
-- `.prototools` defines Node.js ^22 and pnpm ^10 versions
+- `.prototools` defines Node.js ^24, pnpm ^10, and npm ^11 versions
 - Run `proto install` to install the correct versions
 - Proto ensures all developers use consistent tool versions
 - `@types/node` should match the Node.js version specified in `.prototools`

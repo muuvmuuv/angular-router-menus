@@ -1,6 +1,6 @@
 # Angular Router Menus
 
-Simplify your Angular applications navigation by defining menu entries directly at the route itself. It is fully typed and defined by your requirements, build as many navigation's as you like. It also supports nesting menus so you can build yourself cool dropdowns. All menus are build and injected into several injection tokens, so you can import them anywhere.
+Simplify your Angular applications navigation by defining menu entries directly at the route itself. It is fully typed and defined by your requirements, build as many navigation's as you like. It also supports nesting menus so you can build yourself cool dropdowns. Menus are exposed as Angular signals for reactive consumption in your templates and components.
 
 ```shell
 pnpm add angular-router-menus
@@ -8,6 +8,14 @@ pnpm add angular-router-menus
 
 > [!TIP]
 > Zero dependencies and no performance bottleneck!
+
+### Version Compatibility
+
+| Library Version | Angular Version |
+| --------------- | --------------- |
+| 21.x            | ^21.0.0         |
+| 20.x            | ^20.0.0         |
+| 3.x             | ^19.0.0         |
 
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -61,7 +69,7 @@ export const routes = [
 
 ## Configuration
 
-For details on menu items configuration, please take a look at the interfaces and its documentation here: [projects/angular-router-menus/src/lib/menu.ts](...)
+For details on menu items configuration, please take a look at the interfaces and its documentation here: [projects/angular-router-menus/src/lib/menu.ts](projects/angular-router-menus/src/lib/menu.ts)
 
 | Property      | Description                                                                |
 | ------------- | -------------------------------------------------------------------------- |
