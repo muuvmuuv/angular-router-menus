@@ -4,7 +4,7 @@ pre-commit:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}"
       run: node_modules/.bin/oxlint {staged_files}
     format:
-      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css,scss,md,yaml,yml}"
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css,scss,md}"
       run: node_modules/.bin/oxfmt --check {staged_files}
 commit-msg:
   commands:
