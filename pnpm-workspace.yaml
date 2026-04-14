@@ -7,5 +7,6 @@ ignoredBuiltDependencies:
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
+  - lefthook
   - lmdb
   - msgpackr-extract

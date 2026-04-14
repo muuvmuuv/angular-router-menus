@@ -5,9 +5,9 @@ import {
 	provideBrowserGlobalErrorListeners,
 	provideZonelessChangeDetection,
 } from "@angular/core"
-import { provideAppRouter } from "src/providers/router"
 
 import { provideIcons } from "../providers/icons"
+import { provideAppRouter } from "../providers/router"
 import { routes } from "./app.routes"
 
 const clientConfig = {

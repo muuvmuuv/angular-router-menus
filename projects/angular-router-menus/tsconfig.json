@@ -1,20 +1,20 @@
 {
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"baseUrl": ".",
+		"rootDir": "./src",
 		"outDir": "./out-tsc"
 	},
 	"files": [],
 	"include": [],
 	"references": [
 		{
-			"path": "tsconfig.lib.json"
+			"path": "./tsconfig.lib.json"
 		},
 		{
-			"path": "tsconfig.editor.json"
+			"path": "./tsconfig.editor.json"
 		},
 		{
-			"path": "tsconfig.prod.json"
+			"path": "./tsconfig.prod.json"
 		}
 	]
 }

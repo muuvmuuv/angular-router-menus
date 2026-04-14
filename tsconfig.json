@@ -3,10 +3,10 @@
 	"files": [],
 	"references": [
 		{
-			"path": "projects/angular-router-menus"
+			"path": "./projects/angular-router-menus"
 		},
 		{
-			"path": "projects/app"
+			"path": "./projects/app"
 		}
 	]
 }
