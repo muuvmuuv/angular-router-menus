@@ -2,6 +2,7 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"compileOnSave": false,
 	"compilerOptions": {
+		"rootDir": "../..",
 		"strict": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,

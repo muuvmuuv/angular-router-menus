@@ -5,7 +5,7 @@ ignoredBuiltDependencies:
   - less
 
 onlyBuiltDependencies:
-  - '@parcel/watcher'
+  - "@parcel/watcher"
   - esbuild
   - lefthook
   - lmdb

@@ -1,10 +1,10 @@
 import { provideHttpClient, withFetch } from "@angular/common/http"
 import {
-	type ApplicationConfig,
 	mergeApplicationConfig,
 	provideBrowserGlobalErrorListeners,
 	provideZonelessChangeDetection,
 } from "@angular/core"
+import type { ApplicationConfig } from "@angular/core"
 
 import { provideIcons } from "../providers/icons"
 import { provideAppRouter } from "../providers/router"

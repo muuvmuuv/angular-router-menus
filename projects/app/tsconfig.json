@@ -1,7 +1,6 @@
 {
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"rootDir": "./src",
 		"outDir": "./out-tsc"
 	},
 	"files": [],
@@ -12,6 +11,9 @@
 		},
 		{
 			"path": "./tsconfig.editor.json"
+		},
+		{
+			"path": "./tsconfig.tools.json"
 		}
 	]
 }

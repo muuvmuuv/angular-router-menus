@@ -1,19 +1,13 @@
-import {
-	assertInInjectionContext,
-	EnvironmentInjector,
-	inject,
-} from "@angular/core"
-import { type Route, RouterPreloader, type Routes } from "@angular/router"
+import { EnvironmentInjector, assertInInjectionContext, inject } from "@angular/core"
+import type { Route, Routes } from "@angular/router"
+import { RouterPreloader } from "@angular/router"
 
 import { normalizePath } from "./helper"
 import type { MenuItem, MenuItems } from "./menu"
 import type { MenuSortOrder, RouterMenusOptions } from "./options"
 import { RouterMenusService } from "./service"
 
-async function resolveLazyLoadedChildren(
-	routes: Routes,
-	options: RouterMenusOptions,
-) {
+async function resolveLazyLoadedChildren(routes: Routes, options: RouterMenusOptions) {
 	assertInInjectionContext(resolveLazyLoadedChildren)
 
 	const injector = inject(EnvironmentInjector)
@@ -26,7 +20,6 @@ async function resolveLazyLoadedChildren(
 	// @ts-expect-error The required method is not exported but private
 	const loader = routerPreloader.loader as RouterConfigLoader
 	if (!loader && options.debug) {
-		// biome-ignore lint/suspicious/noConsole: report api
 		console.warn("Loader not present", routerPreloader)
 	}
 
@@ -42,7 +35,6 @@ async function resolveLazyLoadedChildren(
 		} catch (error) {
 			// Skip this route if private API fails
 			if (options.debug) {
-				// biome-ignore lint/suspicious/noConsole: debug information
 				console.warn("Failed to resolve lazy route:", route.path, error)
 			}
 			return []
@@ -98,7 +90,7 @@ function convertRoutesToMenuItems(
 		const href = normalizePath(`/${parent?.href ?? ""}/${route.path ?? ""}`)
 
 		const menuItem: MenuItem = {
-			label: "", // keep empty for later checks
+			label: "", // Keep empty for later checks
 			priority: route.menu?.priority ?? 0,
 			in: route.menu?.in ?? options.defaultMenu,
 			icon: route.menu?.icon,
@@ -106,20 +98,17 @@ function convertRoutesToMenuItems(
 		}
 
 		if (route.menu) {
-			// Set label only if its a menu item, this is also used to flatten
-			// the menu items later and to differ between real menu items and just
-			// paths that were required for the build process
+			/**
+			 * Set label only if its a menu item, this is also used to flatten
+			 * the menu items later and to differ between real menu items and just
+			 * paths that were required for the build process
+			 */
 			menuItem.label =
-				route.menu.label ??
-				(typeof route.title === "string" ? route.title : "ERROR")
+				route.menu.label ?? (typeof route.title === "string" ? route.title : "ERROR")
 		}
 
 		if (route.children) {
-			menuItem.children = convertRoutesToMenuItems(
-				route.children,
-				options,
-				menuItem,
-			)
+			menuItem.children = convertRoutesToMenuItems(route.children, options, menuItem)
 		}
 
 		menuItems.push(menuItem)
@@ -130,8 +119,10 @@ function convertRoutesToMenuItems(
 
 function buildMenu(data: MenuItems, inMenu: Menus) {
 	return data.reduce<MenuItems>((accumulator, item) => {
-		// It must have a label to be a valid menu entry which is empty as by
-		// previous `convertRoutesToMenuItems` function.
+		/**
+		 * It must have a label to be a valid menu entry which is empty as by
+		 * previous `convertRoutesToMenuItems` function.
+		 */
 		if (item.label && item.in === inMenu) {
 			if (item.children) {
 				accumulator.push({
@@ -151,15 +142,12 @@ function buildMenu(data: MenuItems, inMenu: Menus) {
 	}, [])
 }
 
-function orderByPriority(
-	items: MenuItems,
-	sortOrder: MenuSortOrder = "asc",
-): MenuItems {
-	items.sort((a, b) => {
+function orderByPriority(items: MenuItems, sortOrder: MenuSortOrder = "asc"): MenuItems {
+	items.sort((aa, bb) => {
 		if (sortOrder === "desc") {
-			return b.priority - a.priority
+			return bb.priority - aa.priority
 		}
-		return a.priority - b.priority
+		return aa.priority - bb.priority
 	})
 
 	for (const item of items) {
@@ -198,8 +186,8 @@ export async function buildRouterMenus(
 
 	for (const menu of menus) {
 		const menuOptions = mo[menu] ?? {}
-		const menus = buildMenu(menuItems, menu)
-		const sortedMenus = orderByPriority(menus, menuOptions.sortOrder)
+		const resolvedMenus = buildMenu(menuItems, menu)
+		const sortedMenus = orderByPriority(resolvedMenus, menuOptions.sortOrder)
 		routerMenusService.use(menu).set(sortedMenus)
 	}
 }

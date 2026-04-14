@@ -10,6 +10,5 @@ if (environment.production) {
 }
 
 bootstrapApplication(AppComponent, config).catch((error) => {
-	// biome-ignore lint/suspicious/noConsole: we need this here
 	console.error(error)
 })

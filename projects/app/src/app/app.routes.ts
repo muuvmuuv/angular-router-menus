@@ -3,25 +3,20 @@ import type { Routes } from "@angular/router"
 export const routes = [
 	{
 		path: "",
-		redirectTo: "home",
 		pathMatch: "full",
+		redirectTo: "home",
 	},
 	{
-		path: "home",
-		title: "Home",
-		loadComponent: () =>
-			import("./features/home/home.component").then((m) => m.HomeFeature),
+		loadComponent: () => import("./features/home/home.component").then((m) => m.HomeFeature),
 		menu: {
 			in: "main", // optional
 			priority: 69,
 		},
+		path: "home",
+		title: "Home",
 	},
 	{
-		path: "some",
-		title: "Some",
-		loadComponent: () =>
-			import("./features/some/some.component").then((m) => m.SomeFeature),
-		preload: true,
+		loadComponent: () => import("./features/some/some.component").then((m) => m.SomeFeature),
 		menu: {
 			/* uses default values */
 			/* and ... */
@@ -29,5 +24,8 @@ export const routes = [
 				name: "gem",
 			},
 		},
+		path: "some",
+		preload: true,
+		title: "Some",
 	},
 ] satisfies Routes

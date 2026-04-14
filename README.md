@@ -42,8 +42,8 @@ void bootstrapApplication(AppComponent, {
 		}),
 	],
 }).catch((error) => {
-	console.error(error);
-});
+	console.error(error)
+})
 ```
 
 ```typescript
@@ -95,9 +95,9 @@ All types by `angular-router-menus` are by default very wide (e.g. `string`), to
 Here is an example which also uses Angular-FontAwesome (see `./projects/app/src/icons.ts` for more) icon names for the menu item icon property so it will autocomplete in your IDE/Editor.
 
 ```typescript
-declare type Menus = "main" | "aside";
-declare type MenuItemIcon = import("@fortawesome/fontawesome-common-types").IconName;
-declare type MenuItemIconPosition = "left" | "right";
+declare type Menus = "main" | "aside"
+declare type MenuItemIcon = import("@fortawesome/fontawesome-common-types").IconName
+declare type MenuItemIconPosition = "left" | "right"
 ```
 
 ## Usage
@@ -111,7 +111,7 @@ declare type MenuItemIconPosition = "left" | "right";
 	imports: [RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class AppComponent {
-	readonly menu = inject(RouterMenusService).use("main"); // 👋🏻
+	readonly menu = inject(RouterMenusService).use("main") // 👋🏻
 }
 ```
 

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core"
 
 @Component({
-	selector: "app-feature-some",
-	templateUrl: "./some.component.html",
-	styleUrl: "./some.component.scss",
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	selector: "app-feature-some",
+	styleUrl: "./some.component.scss",
+	templateUrl: "./some.component.html",
 })
 export class SomeFeature {}

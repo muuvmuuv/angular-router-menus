@@ -1,4 +1,5 @@
-import { Injectable, signal, type WritableSignal } from "@angular/core"
+import { Injectable, signal } from "@angular/core"
+import type { WritableSignal } from "@angular/core"
 
 import type { MenuItems } from "./menu"
 
@@ -12,7 +13,7 @@ export class RouterMenusService {
 		if (this.#menus.has(menu)) {
 			throw new Error("Cannot add menu twice")
 		}
-		this.#menus.set(menu, signal<MenuItems>(items))
+		this.#menus.set(menu, signal(items))
 	}
 
 	use(menu: Menus): WritableSignal<MenuItems> {

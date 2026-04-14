@@ -1,13 +1,11 @@
 /**
  * We add some specials to the router by our router strategy.
  */
-declare module "@angular/router" {
-	interface Route {
+export module "@angular/router" {
+	declare interface Route {
 		/**
 		 * Mark this component as preloadable. Default: `false`
 		 */
 		preload?: boolean
 	}
 }
-
-export {}

@@ -1,17 +1,17 @@
 {
 	"name": "angular-router-menus-workspace",
 	"version": "21.0.2",
+	"private": true,
 	"license": "MIT",
 	"type": "module",
-	"private": true,
 	"scripts": {
 		"build": "pnpm --filter=angular-router-menus build",
 		"watch": "pnpm --filter=angular-router-menus watch",
 		"serve": "pnpm --filter=app serve",
 		"serve-extended": "pnpm --filter=app serve-extended",
 		"build-app": "pnpm --filter=app build",
-		"check": "biome check .",
-		"format": "biome check --unsafe --write ."
+		"check": "oxlint . && oxfmt --check .",
+		"format": "oxlint --fix . && oxfmt ."
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^21.2.7",
@@ -19,7 +19,6 @@
 		"@angular/build": "^21.2.7",
 		"@angular/cli": "^21.2.7",
 		"@angular/compiler-cli": "^21.2.8",
-		"@biomejs/biome": "^2.4.11",
 		"@commitlint/cli": "^20.5.0",
 		"@commitlint/config-angular": "^20.5.0",
 		"@release-it/bumper": "^7.0.5",
@@ -27,7 +26,9 @@
 		"del-cli": "^7.0.0",
 		"lefthook": "^2.1.5",
 		"ng-packagr": "^21.2.2",
-		"prettier": "^3.8.2",
+		"oxfmt": "^0.45.0",
+		"oxlint": "^1.60.0",
+		"oxlint-tsgolint": "^0.21.0",
 		"release-it": "^19.2.4",
 		"typescript": "5.9.3"
 	},
