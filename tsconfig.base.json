@@ -3,6 +3,9 @@
 	"compileOnSave": false,
 	"compilerOptions": {
 		"rootDir": "../..",
+		"paths": {
+			"angular-router-menus": ["./projects/angular-router-menus/src/public-api.ts"]
+		},
 		"strict": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
