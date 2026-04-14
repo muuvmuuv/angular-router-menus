@@ -1,6 +1,6 @@
 {
 	"name": "angular-router-menus",
-	"version": "21.2.0",
+	"version": "21.2.1",
 	"description": "Angular Router menus that build itself on-the-fly with options",
 	"keywords": [
 		"angular",
