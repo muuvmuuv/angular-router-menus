@@ -9,13 +9,12 @@
 		"ng": "ng"
 	},
 	"dependencies": {
-		"@angular/animations": "21.2.8",
-		"@angular/common": "21.2.8",
-		"@angular/compiler": "21.2.8",
-		"@angular/core": "21.2.8",
-		"@angular/platform-browser": "21.2.8",
-		"@angular/router": "21.2.8",
-		"@fortawesome/angular-fontawesome": "^4.0.0",
+		"@angular/common": "^22.0.0",
+		"@angular/compiler": "^22.0.0",
+		"@angular/core": "^22.0.0",
+		"@angular/platform-browser": "^22.0.0",
+		"@angular/router": "^22.0.0",
+		"@fortawesome/angular-fontawesome": "^5.0.0",
 		"@fortawesome/fontawesome-common-types": "^7.2.0",
 		"@fortawesome/free-regular-svg-icons": "^7.2.0",
 		"@tailwindcss/postcss": "^4.2.2",
@@ -27,9 +26,9 @@
 		"type-fest": "^5.5.0"
 	},
 	"devDependencies": {
-		"angular-extended-builder": "^21.0.2",
+		"angular-extended-builder": "^22.0.0",
 		"esbuild": "^0.28.0",
 		"sass": "^1.99.0",
-		"typescript": "5.9.3"
+		"typescript": "6.0.3"
 	}
 }

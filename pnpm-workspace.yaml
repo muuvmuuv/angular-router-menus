@@ -1,6 +1,10 @@
 packages:
   - projects/*
 
+minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+  - angular-extended-builder
+
 ignoredBuiltDependencies:
   - less
 

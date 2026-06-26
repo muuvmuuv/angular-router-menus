@@ -13,6 +13,7 @@ pnpm add angular-router-menus
 
 | Library Version | Angular Version |
 | --------------- | --------------- |
+| 22.x            | ^22.0.0         |
 | 21.x            | ^21.0.0         |
 | 20.x            | ^20.0.0         |
 | 3.x             | ^19.0.0         |

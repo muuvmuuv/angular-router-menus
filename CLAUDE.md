@@ -63,6 +63,8 @@ The project uses lefthook for git hooks:
 Commit messages must follow the Angular convention: `type(scope): subject`
 Common types: `feat`, `fix`, `build`, `docs`, `refactor`, `test`, `chore`
 
+Do **not** add `Co-authored-by` trailers or any AI/tool attribution to commit messages or PR descriptions.
+
 ## Architecture
 
 This is a monorepo using pnpm workspaces with two main projects:
