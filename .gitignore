@@ -29,3 +29,4 @@ testem.log
 .DS_Store
 Thumbs.db
 *.tsbuildinfo
+.claude/settings.local.json

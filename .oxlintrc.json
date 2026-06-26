@@ -11,6 +11,6 @@
 		"browser": true,
 		"node": true
 	},
-	"ignorePatterns": ["dist/", "node_modules/", ".angular/", "**/*.html"],
+	"ignorePatterns": ["dist/", "node_modules/", ".angular/", "**/*.html", "**/generated*"],
 	"rules": {}
 }

@@ -9,14 +9,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm serve` - Run the demo application with hot reload
 - `pnpm build` - Build the angular-router-menus library
 - `pnpm watch` - Build the library in watch mode
+- `pnpm test` - Run unit tests (Vitest)
+- `pnpm test:watch` - Run unit tests in watch mode
 
 ### Release Process
 
 To release the library to npm:
 
-1. `pnpm --filter=angular-router-menus release` - Uses release-it which will:
+1. `pnpm release` - Uses release-it which will:
    - Run `pnpm check` as a pre-release hook
-   - Bump version in `projects/angular-router-menus/package.json` (via @release-it/bumper)
+   - Bump the version in both `projects/angular-router-menus/package.json` and the root `package.json` (via @release-it/bumper)
    - Create a git commit (`build: release v<version>`) and tag (`v<version>`)
    - Requires a clean working directory and the `main` branch
    - Does **not** publish to npm directly — publishing is triggered by the GitHub Actions `publish.yml` workflow when a `v*` tag is pushed
@@ -146,11 +148,11 @@ When upgrading dependencies:
    - Check outdated packages: `pnpm outdated -r`
    - Update Angular packages while maintaining version compatibility
    - Use workspace filters instead of cd: `pnpm --filter=<project> <command>`
-   - Ensure TypeScript version matches Angular requirements (usually 5.8.x for Angular 20)
+   - Ensure TypeScript version matches Angular requirements (6.0.x for Angular 22)
    - Update peer dependencies in library package.json if needed
 3. **Test builds**: Always test both `pnpm build` (library) and `pnpm --filter=app build` (app)
 4. **Fix peer dependency mismatches**: Add missing Angular packages to dependencies if needed
-5. **Run linting**: Use `pnpm lint` and `pnpm format` to check and fix issues
+5. **Run linting**: Use `pnpm check` and `pnpm format` to check and fix issues
 
 Common issues:
 
@@ -161,18 +163,19 @@ Common issues:
 
 ## Dependencies
 
-- Angular 21+ with standalone components
+- Angular 22+ with standalone components
 - Node.js 24+ (managed via Proto tools - see `.prototools`)
-- pnpm 10+ (managed via Proto tools - see `.prototools`)
+- pnpm 11+ (managed via Proto tools - see `.prototools`)
 - oxlint for linting (configured in `.oxlintrc.json`)
 - oxfmt for formatting (configured in `.oxfmtrc.json`)
-- TypeScript 5.9+ with strict mode enabled
+- Vitest for unit tests (configured in `projects/angular-router-menus/vitest.config.ts`)
+- TypeScript 6.0.x with strict mode enabled
 
 ## Development Environment
 
 This project uses [Proto](https://moonrepo.dev/proto) for managing development tools:
 
-- `.prototools` defines Node.js ^24, pnpm ^10, and npm ^11 versions
+- `.prototools` defines Node.js ^24, pnpm ^11, and npm ^11 versions
 - Run `proto install` to install the correct versions
 - Proto ensures all developers use consistent tool versions
 - `@types/node` should match the Node.js version specified in `.prototools`

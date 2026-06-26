@@ -5,14 +5,15 @@
 			"Bash(oxlint:*)",
 			"Bash(oxfmt:*)",
 			"Bash(ng:*)",
-			"Bash(git add:*)",
-			"Bash(git commit:*)",
 			"Bash(git status:*)",
 			"Bash(git log:*)",
 			"Bash(git diff:*)",
+			"Bash(git add:*)",
+			"Bash(git commit:*)",
 			"WebFetch(domain:github.com)",
 			"WebFetch(domain:angular.dev)",
-			"WebFetch(domain:oxc.rs)"
+			"WebFetch(domain:oxc.rs)",
+			"WebFetch(domain:tsx.is)"
 		],
 		"deny": []
 	},

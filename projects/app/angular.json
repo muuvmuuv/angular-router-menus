@@ -33,6 +33,11 @@
 							"subresourceIntegrity": true,
 							"outputHashing": "all"
 						},
+						"github-pages": {
+							"subresourceIntegrity": true,
+							"outputHashing": "all",
+							"baseHref": "/angular-router-menus/"
+						},
 						"development": {
 							"optimization": false,
 							"extractLicenses": false,

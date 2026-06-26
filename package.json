@@ -7,11 +7,14 @@
 	"scripts": {
 		"build": "pnpm --filter=angular-router-menus build",
 		"watch": "pnpm --filter=angular-router-menus watch",
+		"test": "pnpm --filter=angular-router-menus test",
+		"test:watch": "pnpm --filter=angular-router-menus test:watch",
 		"serve": "pnpm --filter=app serve",
 		"serve-extended": "pnpm --filter=app serve-extended",
 		"build-app": "pnpm --filter=app build",
 		"check": "oxlint . && oxfmt --check .",
-		"format": "oxlint --fix . && oxfmt ."
+		"format": "oxlint --fix . && oxfmt .",
+		"release": "release-it"
 	},
 	"devDependencies": {
 		"@angular-devkit/core": "^22.0.0",
@@ -29,9 +32,10 @@
 		"oxlint": "^1.60.0",
 		"oxlint-tsgolint": "^0.21.0",
 		"release-it": "^19.2.4",
-		"typescript": "6.0.3"
+		"typescript": "6.0.3",
+		"vitest": "^4.1.4"
 	},
 	"engines": {
-		"node": ">=22"
+		"node": ">=24"
 	}
 }

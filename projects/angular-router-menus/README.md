@@ -70,7 +70,7 @@ export const routes = [
 
 ## Configuration
 
-For details on menu items configuration, please take a look at the interfaces and its documentation here: [src/lib/menu.ts](https://github.com/muuvmuuv/angular-router-menus/blob/main/projects/angular-router-menus/src/lib/menu.ts)
+For details on menu items configuration, please take a look at the interfaces and its documentation here: [projects/angular-router-menus/src/lib/menu.ts](projects/angular-router-menus/src/lib/menu.ts)
 
 | Property      | Description                                                                |
 | ------------- | -------------------------------------------------------------------------- |
@@ -101,7 +101,7 @@ Define options for a specific menu.
 
 All types by `angular-router-menus` are by default very wide (e.g. `string`), to use your own custom types, you can override the declarations by defining your types in e.g. a `arm-types.d.ts` file.
 
-Here is an example which also uses Angular-FontAwesome (see `./projects/app/src/icons.ts` for more) icon names for the menu item icon property so it will autocomplete in your IDE/Editor.
+Here is an example which also uses Angular-FontAwesome (see `./projects/app/src/providers/icons.ts` for more) icon names for the menu item icon property so it will autocomplete in your IDE/Editor.
 
 ```typescript
 declare type Menus = "main" | "aside"

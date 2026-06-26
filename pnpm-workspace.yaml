@@ -4,13 +4,17 @@ packages:
 minimumReleaseAge: 4320
 minimumReleaseAgeExclude:
   - angular-extended-builder
+  - "@angular/*"
+  - "@angular-devkit/*"
+  - "@schematics/angular"
+  - ng-packagr
 
-ignoredBuiltDependencies:
-  - less
+verifyDepsBeforeRun: false
 
-onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - esbuild
-  - lefthook
-  - lmdb
-  - msgpackr-extract
+allowBuilds:
+  "@parcel/watcher": true
+  esbuild: true
+  lefthook: true
+  lmdb: true
+  msgpackr-extract: true
+  less: false

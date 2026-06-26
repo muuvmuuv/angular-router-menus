@@ -22,8 +22,10 @@
 	},
 	"sideEffects": false,
 	"scripts": {
-		"build": "ng build",
+		"build": "cp ../../README.md README.md && ng build",
 		"watch": "ng build -c development --watch",
+		"test": "vitest run",
+		"test:watch": "vitest",
 		"ng": "ng"
 	},
 	"dependencies": {
@@ -37,6 +39,6 @@
 		"@angular/router": "^22.0.0"
 	},
 	"engines": {
-		"node": ">=22"
+		"node": ">=24"
 	}
 }

@@ -4,8 +4,11 @@ pre-commit:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}"
       run: node_modules/.bin/oxlint {staged_files}
     format:
-      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css,scss,md}"
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css,scss,md,yaml,yml}"
       run: node_modules/.bin/oxfmt --check {staged_files}
+    readme-sync:
+      glob: "{README.md,projects/*/README.md}"
+      run: 'for f in projects/*/README.md; do cmp -s README.md "$f" || { echo "README drift: $f differs from root README.md - run pnpm build and re-stage"; exit 1; }; done'
 commit-msg:
   commands:
     lint-commit-msg:

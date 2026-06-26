@@ -16,7 +16,7 @@
 	},
 	"plugins": {
 		"@release-it/bumper": {
-			"out": ["projects/angular-router-menus/package.json"]
+			"out": ["projects/angular-router-menus/package.json", "package.json"]
 		}
 	}
 }
