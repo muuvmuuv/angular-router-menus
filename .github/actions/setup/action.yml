@@ -14,4 +14,9 @@ runs:
       uses: pnpm/action-setup@v6
       with:
         version: 11
-        run_install: true
+
+    - name: Install dependencies
+      shell: bash
+      # CI installs the already-vetted committed lockfile, so skip the release-age
+      # cooldown here (it gates new deps at resolution time, locally).
+      run: pnpm install --frozen-lockfile --config.minimumReleaseAge=0
