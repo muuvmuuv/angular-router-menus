@@ -2,5 +2,6 @@
 	"semi": false,
 	"useTabs": true,
 	"printWidth": 94,
-	"sortImports": true
+	"sortImports": true,
+	"ignorePatterns": ["dist/", ".angular/"]
 }

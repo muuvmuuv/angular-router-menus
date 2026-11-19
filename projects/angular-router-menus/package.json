@@ -29,7 +29,7 @@
 		"ng": "ng"
 	},
 	"dependencies": {
-		"tslib": "^2.8.1"
+		"tslib": "^2.9.1"
 	},
 	"devDependencies": {
 		"typescript": "6.0.3"
