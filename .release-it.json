@@ -3,13 +3,15 @@
 		"commitMessage": "build: release v${version}",
 		"tagName": "v${version}",
 		"requireCleanWorkingDir": true,
-		"requireBranch": "main"
+		"requireBranch": "main",
+		"push": false
 	},
 	"github": {
 		"release": false
 	},
 	"npm": {
-		"publish": false
+		"publish": false,
+		"allowSameVersion": true
 	},
 	"hooks": {
 		"before:init": "pnpm check"
